@@ -1,0 +1,38 @@
+<actor type="">
+	<transformComponent>
+		<position x="0" y="0" z="0"/>
+	</transformComponent>
+
+	<physicsComponent>
+		<mass>1.0</mass>
+	</physicsComponent>
+	
+	<spriteComponent>
+		<texture>jimmy.png</textuer>	// you can put texture or
+	</spriteComponent>
+	
+	<animationComponent>
+		<motionwelder>jimmy.anu</motionwelder>	// motionwelder file, default it load the 0 index animation
+	</animationComponent>
+
+	// state component defines states of an actor
+	<stateComponent>
+		<state>
+			<id>0</id>	// default state
+			<animId>0</animId>	// anim index in the motionwelder file
+			<hasCtrl>1</hasCtrl>	// alow to interupt by input
+		</state>
+		<state>
+			<id>1</id>
+			<animId>1</animId>
+			<velset x="2" y="0"></velset> // increase it's velocity
+			// you can active those event in the state under some condition
+			<stateCtrl type="changeState" value="0"> // to change state back to "1" when animation is finished
+				// you can have multiple trigger
+				<trigger type="animTime" value="0"></trigger>
+			</stateCtrl>
+		</state>
+	</stateComponent>
+	
+	// cmd, accept user input and change actor's state
+</actor>

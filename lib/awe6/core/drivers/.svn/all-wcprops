@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/470/trunk/app/src/awe6/core/drivers
+END
+AInputKeyboard.hx
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/427/trunk/app/src/awe6/core/drivers/AInputKeyboard.hx
+END
+AKernel.hx
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/437/trunk/app/src/awe6/core/drivers/AKernel.hx
+END
+AOverlay.hx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/470/trunk/app/src/awe6/core/drivers/AOverlay.hx
+END
+AProfiler.hx
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/383/trunk/app/src/awe6/core/drivers/AProfiler.hx
+END
+ASession.hx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/383/trunk/app/src/awe6/core/drivers/ASession.hx
+END
+AFactory.hx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/444/trunk/app/src/awe6/core/drivers/AFactory.hx
+END
+ASceneTransition.hx
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/383/trunk/app/src/awe6/core/drivers/ASceneTransition.hx
+END
+AInputMouse.hx
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/427/trunk/app/src/awe6/core/drivers/AInputMouse.hx
+END
+AView.hx
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/455/trunk/app/src/awe6/core/drivers/AView.hx
+END
+AAudioManager.hx
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/383/trunk/app/src/awe6/core/drivers/AAudioManager.hx
+END
+APreloader.hx
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/428/trunk/app/src/awe6/core/drivers/APreloader.hx
+END

@@ -1,0 +1,14 @@
+<scene id="sceneLogo">
+	<sprite id="background" x="0" y="0" img="assets/game/layout.png"></sprite>
+	<!--
+	<label id="labelLevel" x="28" y="8" text="LEVEL:" size="26" color="0x000000"></label>	
+	<label id="labelTime" x="28" y="43" text="TIME:" size="26" color="0x000000"></label>	
+	<label id="labelScore" x="230" y="8" text="SCORE:" size="26" color="0x000000"></label>	
+	<progressBar id="progressBarTime" x="113" y="60" width="348" height="26"></progressBar>
+	-->
+	
+	<!--<button id="startGameBtn" x="0" y="20" text="hello world!" targetId="sceneLogo" handler="startBtnClicked"></button>
+	<panel id="mainPanel" x="50" y="50"></panel>
+	<checkBox id="checkBox1" x="0" y="0" text="checkBox1!!!" handler="checkBoxClickedHandler"></checkBox>
+-->
+</scene>

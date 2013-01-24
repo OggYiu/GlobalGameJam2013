@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/9/trunk/box2D/collision/shapes
+END
+B2MassData.hx
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/box2D/collision/shapes/B2MassData.hx
+END
+B2Shape.hx
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3/trunk/box2D/collision/shapes/B2Shape.hx
+END
+B2CircleShape.hx
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3/trunk/box2D/collision/shapes/B2CircleShape.hx
+END
+B2EdgeShape.hx
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3/trunk/box2D/collision/shapes/B2EdgeShape.hx
+END
+B2PolygonShape.hx
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/9/trunk/box2D/collision/shapes/B2PolygonShape.hx
+END
+b2EdgeChainDef.as
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/box2D/collision/shapes/b2EdgeChainDef.as
+END

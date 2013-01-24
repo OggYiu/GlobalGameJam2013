@@ -1,0 +1,38 @@
+<scene id="sceneLogo">
+	<state id="0">
+		<controller type="changeState">
+			<state>1</state>
+			<triggerGroup logic="or">
+				<trigger type="mouse">
+					<type>click</type>
+					<value>0</value>
+				</trigger>
+				<trigger type="keyboard">
+					<type>press</type>
+					<value>-1</value>
+				</trigger>
+			</triggerGroup>
+		</controller>
+	</state>
+	<state id="1">
+		<controller type="fadeout">
+			<fromColor>0xffffff</fromColor>
+			<toColor>0x000000</toColor>
+			<duration>1</duration>
+			<triggerGroup>
+				<type>time</type>
+				<value>0</value>
+			</triggerGroup>
+		</controller>
+		<controller type="changeScene">
+			<scene>mainMenu</scene>
+		</controller>
+	</state>
+	<layout>
+		<sprite id="background" x="50" y="100" img="assets/img/background.png"></sprite>
+		<button id="startGameBtn" x="0" y="20" text="hello world!" targetId="sceneLogo" handler="startBtnClicked"></button>
+		<panel id="mainPanel" x="50" y="50"></panel>
+		<label id="label" canvasId="spriteLogo" x="20" y="20" text="label text" size="8", colo="0x000000" panelComponentId="mainPanel"></label>	
+		<checkBox id="checkBox1" x="0" y="0" text="checkBox1!!!" targetId="sceneLogo" handler="checkBoxClickedHandler"></checkBox>
+	</layout>
+</scene>

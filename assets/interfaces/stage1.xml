@@ -1,0 +1,9 @@
+<stage id="stage1">
+	<sprite id="leftPic" x="31" y="103" img="assets/game/leftPic.png"></sprite>
+	<sprite id="rightPic" x="538" y="103" img="assets/game/rightPic.png"></sprite>
+	<touchCollideBox x="0" y="577" width="52" height="33" handler="onCollideRectClicked"></touchCollideBox>
+	<touchCollideBox x="398" y="436" width="57" height="57" handler="onCollideRectClicked"></touchCollideBox>
+	<touchCollideBox x="80" y="511" width="60" height="39" handler="onCollideRectClicked"></touchCollideBox>
+	<touchCollideBox x="278" y="335" width="83" height="44" handler="onCollideRectClicked"></touchCollideBox>
+	<touchCollideBox x="234" y="100" width="30" height="32" handler="onCollideRectClicked"></touchCollideBox>
+</stage>

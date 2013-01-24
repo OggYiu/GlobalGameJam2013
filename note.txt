@@ -1,0 +1,23 @@
+entity
+- entity has components which listed below
+- entity has different state
+
+components
+- transform ( position )
+- sprite ( a single image )
+- animation ( read from motionwelder )
+
+example format in actorFormat.xml
+
+state controller of mugen study :
+website is here : http://www.elecbyte.com/mugendocs/sctrls.html
+the statecontroller we may need in a fighting game:
+
+	- Afterimage
+	a visual effect that display a lots of delayed player image
+	
+	- BGPalFx
+	change the color palette to do special move effect 
+
+	- DestroySelf
+	kill yourself

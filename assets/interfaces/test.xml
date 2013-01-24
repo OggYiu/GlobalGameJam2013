@@ -1,0 +1,9 @@
+<scene id="sceneLogo">
+	<sprite id="leftPic" x="31" y="103" img="assets/game/leftPic.png"></sprite>
+	<sprite id="rightPic" x="538" y="103" img="assets/game/rightPic.png"></sprite>
+	
+	<!--<button id="startGameBtn" x="0" y="20" text="hello world!" targetId="sceneLogo" handler="startBtnClicked"></button>
+	<panel id="mainPanel" x="50" y="50"></panel>
+	<checkBox id="checkBox1" x="0" y="0" text="checkBox1!!!" handler="checkBoxClickedHandler"></checkBox>
+-->
+</scene>
