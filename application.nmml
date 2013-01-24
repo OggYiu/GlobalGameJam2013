@@ -8,7 +8,7 @@
 	<!-- output -->
 	<app main="Main" file="icecream" path="bin" />
 	
-	<window background="#000000" fps="30" />
+	<window background="#aaaaaa" fps="30" />
 	<window width="200" height="150" unless="mobile" />
 	<window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
 	
@@ -28,6 +28,10 @@
 	<assets path="assets/audio/music" rename="assets/audio/music" type="music" include="*" />
 	<assets path="assets/motionwelder"/>
 	
+    <haxedef name="fdb" if="target_flash"/>
+    <haxedef name="-D" if="target_flash"/>
+    <haxedef name="network-sandbox" if="target_flash"/>
+    
 	<!-- DLLs -->
 	<ndll name="std" />
 	<ndll name="regexp" />

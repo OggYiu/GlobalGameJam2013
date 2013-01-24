@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <app title="trace" file="trace" main="Trace" package="org.ragbit.jam" version="1.0.0" company="ragbit" />
+    <window width="800" height="600"/>
+    <window fps="30" />
+
+    <set name="BUILD_DIR" value="export" />
+
+    <source path="src" />
+    <source path="lib" />
+    <haxelib name="nme" />
+    
+    <haxedef name="fdb" if="target_flash" />
+    <haxedef name="-D"/>
+    <haxedef name="network-sandbox"/>
+
+    <assets path="assets/fonts" rename="assets/fonts" include="*" />
+    
+    <ndll name="std" />
+    <ndll name="regexp" />
+    <ndll name="zlib" />
+    <ndll name="nme" haxelib="nme" />
+</project>

@@ -1,14 +1,16 @@
 -main ApplicationMain 
--lib nme
--lib actuate
+-D nme_install_tool
 -cp src
 -cp lib
--cp C:\Motion-Twin\Haxe\lib\nme/3,5,3/
--D nme_install_tool
+-lib nme
+-lib actuate
 -D fdb
--swf-version 11
+-D -D
+-D network-sandbox
+-D web
+-swf-version 10.1
 -swf9 bin/flash/bin/icecream.swf
--swf-header 200:150:30:0
+-swf-header 200:150:30:aaaaaa
 -cp bin/flash/haxe
 --no-inline
 -debug

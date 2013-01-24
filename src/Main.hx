@@ -1,6 +1,8 @@
 package ;
 
 import firerice.core.Kernal;
+import firerice.log.ConsoleSender;
+import firerice.log.RayTrace;
 import haxe.Timer;
 import nme.display.Sprite;
 import nme.events.Event;
@@ -20,6 +22,13 @@ class Main extends Sprite
 	public function new() 
 	{
 		super();
+
+		#if flash
+		var console_sender_ : ConsoleSender;
+    	console_sender_ = new ConsoleSender();
+	    trace ( RayTrace.COMMAND_CLEAR );
+	    #end
+
 		#if iphone
 		Lib.current.stage.addEventListener(Event.RESIZE, init);
 		#else
@@ -28,6 +37,7 @@ class Main extends Sprite
 		
 		addEventListener( Event.ENTER_FRAME, update );
 		
+		trace( "hahaha" );
 		kernal_ = new Kernal( this );
 	}
 

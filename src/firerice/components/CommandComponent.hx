@@ -1,5 +1,6 @@
 package firerice.components;
 
+import firerice.core.Entity;
 /**
  * ...
  * @author oggyiu
@@ -8,7 +9,7 @@ package firerice.components;
 class CommandComponent extends Component
 {
 	public static var ID : String = "commandComponent.ID";
-	public function new() 
+	public function new( p_owner : Entity, filePath : String )
 	{
 		super( CommandComponent.ID );
 	}
