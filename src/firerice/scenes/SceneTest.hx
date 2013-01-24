@@ -2,6 +2,7 @@ package firerice.scenes;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
 import firerice.components.TransformComponent;
+import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;
 import firerice.types.EUserInterface;
@@ -47,6 +48,7 @@ class SceneTest extends Scene
 		//drone_.addComponent( new SpriteComponent( drone_, [ Assets.getBitmapData( "assets/game/monk.png" ) ] ) );
 		drone_.addComponent( new TransformComponent ( drone_, 100, 100, 0 ) );
 		drone_.addComponent( new AnimationComponent( drone_, "assets/motionwelder/characters" ) );
+		drone_.addComponent( new CommandComponent( drone_, "assets/data/cmdTest.xml" ) );
 		//trace( "result : " + drone_.context.x );
 	}
 	

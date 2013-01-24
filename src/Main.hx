@@ -37,7 +37,6 @@ class Main extends Sprite
 		
 		addEventListener( Event.ENTER_FRAME, update );
 		
-		trace( "hahaha" );
 		kernal_ = new Kernal( this );
 	}
 
@@ -53,7 +52,7 @@ class Main extends Sprite
 			dt = Timer.stamp() - lastUpdateTime_;
 		}
 		lastUpdateTime_ = Timer.stamp();
-		
+
 		kernal_.update( dt );
 	}
 	
