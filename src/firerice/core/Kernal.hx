@@ -7,6 +7,7 @@ import firerice.core.InputManager;
 import firerice.scenes.SceneTest;
 import firerice.scenes.SceneGame;
 import firerice.scenes.SceneYiuTest;
+import firerice.scenes.SceneRoom;
 import nme.display.Sprite;
 import nme.events.KeyboardEvent;
 import nme.events.MouseEvent;
@@ -36,6 +37,7 @@ class Kernal extends Process {
 		registerScene( SceneTest.ID, SceneTest );
 		registerScene( SceneGame.ID, SceneGame );
 		registerScene( SceneYiuTest.ID, SceneYiuTest );
+		registerScene( SceneRoom.ID, SceneRoom );
 
 		InputManager.getInstance();
 		
@@ -45,6 +47,7 @@ class Kernal extends Process {
 		
 		// var startSceneId : String = SceneTest.ID;
 		// var startSceneId : String = SceneYiuTest.ID;
+		// var startSceneId : String = SceneRoom.ID;
 		var startSceneId : String = SceneGame.ID;
 		changeScene( startSceneId );
 	}
@@ -53,13 +56,14 @@ class Kernal extends Process {
 		var targetClassType : Class<Scene> = sceneRegistry_.get( sceneId );
 		Helper.assert( targetClassType != null, "class not found, sceneId: " + sceneId );
 		
+		if ( currentScene != null ) {
+			currentScene.dispose();
+			currentScene = null;
+		}
+
 		//trace( "creating scene: " + sceneId );
 		var scene : Scene = Type.createInstance( targetClassType, [ canvas_ ] );
 		trace( "scene created: " + scene );
-		
-		if ( currentScene != null ) {
-			currentScene.dispose();
-		}
 		currentScene = scene;
 	}
 	

@@ -27,10 +27,15 @@ import com.eclecticdesignstudio.motion.Actuate;
 class CollisionBox {
 	public var owner( default, null ) : Actor;
 	public var rect( default, null ) : Rectangle;
+	public var dead( default, default ) : Bool = false;
 
 	public function new( p_owner : Actor, p_rect : Rectangle ) : Void {
 		owner = p_owner;
-		rect = new Rectangle( p_rect.x + owner.x, p_rect.y + owner.y, p_rect.width, p_rect.height );
+		if( owner != null ) {
+			rect = new Rectangle( p_rect.x + owner.x, p_rect.y + owner.y, p_rect.width, p_rect.height );
+		} else {
+			rect = new Rectangle( p_rect.x, p_rect.y, p_rect.width, p_rect.height );
+		}
 
 		// trace( "rect.x: " + rect.x + ", rect.y: " + rect.y );
 	}

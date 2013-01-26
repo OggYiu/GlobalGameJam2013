@@ -27,6 +27,7 @@ import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.media.Sound;
 import nme.geom.Point;
+import nme.geom.Rectangle;
 import nme.Lib;
 import com.eclecticdesignstudio.motion.Actuate;
 
@@ -38,7 +39,6 @@ import com.eclecticdesignstudio.motion.Actuate;
 class SceneGame extends Scene
 {
 	public static var ID : String = "sceneGame";
-	static var PLAYER_VELOCITY : Float = 300;
 
 	var scrollBg_ : UIScrollBg = null;
 	var player_ : Player = null;
@@ -47,6 +47,8 @@ class SceneGame extends Scene
 	var monsterList : Array<Monster> = null;
 
 	var bgMusic_ : Sound = null;
+	var bgChannel_ : nme.media.SoundChannel = null;
+
 	var isGameOver_ : Bool = false;
 
 	public var blackWhiteMap( default, null ) : BitmapData = null;
@@ -114,9 +116,8 @@ class SceneGame extends Scene
 		monsterList.push(monster_);
 
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
-		var bgChannel : nme.media.SoundChannel = bgMusic_.play( 0, 10000 );
+		bgChannel_ = bgMusic_.play( 0, 10000 );
 		// bgChannel.soundTransform.volume = 0.0;
-
 
 		HeartBeat.getInstance();
 		CollisionManager.getInstance().target = this;
@@ -143,8 +144,8 @@ class SceneGame extends Scene
 		var backupPosX : Float = player_.x;
 		var backupPosY : Float = player_.y;
 		if( InputManager.getInstance().isKeyOnPress( 38 ) ) {
-			player_.y = player_.y - PLAYER_VELOCITY * dt;
-			modY -= PLAYER_VELOCITY * dt;
+			player_.y = player_.y - Player.PLAYER_VELOCITY * dt;
+			modY -= Player.PLAYER_VELOCITY * dt;
 
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
@@ -156,8 +157,8 @@ class SceneGame extends Scene
 			}
 		}
 		if( InputManager.getInstance().isKeyOnPress( 40 ) ) {
-			modY += PLAYER_VELOCITY * dt;
-			player_.y = player_.y + PLAYER_VELOCITY * dt;
+			modY += Player.PLAYER_VELOCITY * dt;
+			player_.y = player_.y + Player.PLAYER_VELOCITY * dt;
 
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
@@ -169,13 +170,13 @@ class SceneGame extends Scene
 			}
 		}
 		if( InputManager.getInstance().isKeyOnPress( 37 ) ) {
-			modX -= PLAYER_VELOCITY * dt;
-			player_.x = player_.x - PLAYER_VELOCITY * dt;
+			modX -= Player.PLAYER_VELOCITY * dt;
+			player_.x = player_.x - Player.PLAYER_VELOCITY * dt;
 			player_.playAnim( ActorAnimType.walkLeft );
 		}
 		if( InputManager.getInstance().isKeyOnPress( 39 ) ) {
-			modX += PLAYER_VELOCITY * dt;
-			player_.x = player_.x + PLAYER_VELOCITY * dt;
+			modX += Player.PLAYER_VELOCITY * dt;
+			player_.x = player_.x + Player.PLAYER_VELOCITY * dt;
 			player_.playAnim( ActorAnimType.walkRight );
 		}
 		if( !InputManager.getInstance().hasKeyPressed() ) {
@@ -201,15 +202,6 @@ class SceneGame extends Scene
 		moveCamera( modX, modY );
 
 		CollisionManager.getInstance().update( dt );
-		// monster_.context.x = monster_.x - Global.getInstance().cameraPos.x;
-		// monster_.context.y = monster_.y - Global.getInstance().cameraPos.y;
-
-		// scrollBg_.update( dt );
-
-		// if( InputManager.getInstance().mouseDown ) {
-		// 	blackWhiteMapHitTest(	InputManager.getInstance().mousePos.x, InputManager.getInstance().mousePos.y,
-		// 							10, 10 );
-		// }
 	}
 
 	function blackWhiteMapHitTest( p_x : Float, p_y : Float, p_width : Float, p_height : Float ) : Bool {
@@ -239,9 +231,20 @@ class SceneGame extends Scene
 	function onCollide( boxA : CollisionBox, boxB : CollisionBox ) : Void {
 		isGameOver_ = true;
 		Actuate.tween( this.context, 1, { alpha : 0 } ).onComplete( onGameOver );
+		boxA.dead = true;
+		boxB.dead = true;
+	}
+
+	override function dispose_() : Void {
+		super.dispose_();
+
+		Global.getInstance().cameraPos.x = 0;
+		Global.getInstance().cameraPos.y = 0;
+		bgChannel_.stop();
 	}
 
 	function onGameOver() : Void {
+		CollisionManager.getInstance().reset();
 		Global.getInstance().sceneGame = null;
 		Kernal.getInstance().changeScene( SceneRoom.ID );
 	}
