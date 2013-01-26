@@ -33,6 +33,7 @@ class InputManager {
 
 	
 	function onKeyDown(event:KeyboardEvent) : Void {
+		// trace( "keycode : " + event.keyCode );
 		keymap.set( event.keyCode + "", true );
 	} 
 
