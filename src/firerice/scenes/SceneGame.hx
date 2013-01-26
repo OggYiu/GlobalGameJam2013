@@ -38,7 +38,9 @@ class SceneGame extends Scene
 
 	var player_ : Player = null;
 
-	var monster_ : Monster = null;
+	//var monster_ : Monster = null;
+	var monsterList : Array<Monster> = null;
+
 	var bgMusic_ : Sound = null;
 
 	public var floorLayer( default, null ) : Sprite = null;
@@ -55,6 +57,7 @@ class SceneGame extends Scene
 		enemyCharacterLayer = new Sprite();
 		obstaclesLayer = new Sprite();
 		fogLayer = new Sprite();
+		monsterList = new Array<Monster>();
 
 		this.context.addChild( floorLayer );
 		this.context.addChild( obstaclesLayer );
@@ -74,19 +77,31 @@ class SceneGame extends Scene
 		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 
-		monster_ = new Monster( "monster1");
+		var monster_ = new Monster( "monster1");
 		monster_.x = 300;
 		monster_.y = 300;
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
-		// monster_.addComponent( new TransformComponent( monster_, 200, 200, 0 ) );
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
-
 		var points:Array<Point> = new Array<Point>();
 		points[0] = new Point(300, 200);
 		points[1] = new Point(300, 300);
 		points[2] = new Point(150, 150);
 		monster_.setWayPoint(points);
+		monsterList.push(monster_);
+
+		var monster2_ = new Monster( "monster2");
+		monster2_.x = 700;
+		monster2_.y = 700;
+		this.addChild( monster2_ );
+		enemyCharacterLayer.addChild( monster2_.context );
+		monster2_.addComponent( new AnimationComponent( monster2_, "assets/motionwelder/monster1" ) );
+		var points2:Array<Point> = new Array<Point>();
+		points2[0] = new Point(800, 700);
+		points2[1] = new Point(650, 700);
+		points2[2] = new Point(750, 600);
+		monster2_.setWayPoint(points2);
+		monsterList.push(monster2_);
 
 		// bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
 		// bgMusic_.play( 0, 1000 );
@@ -94,6 +109,12 @@ class SceneGame extends Scene
 		HeartBeat.getInstance();
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
+
+		var maskLayer = new Sprite();
+		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
+		maskLayer.x = 0;
+		maskLayer.y = -150;
+		this.context.addChild(maskLayer);
 	}
 
 	override function update_( dt : Float ) : Void {
@@ -148,8 +169,11 @@ class SceneGame extends Scene
 		moveCamera( modX, modY );
 		CollisionManager.getInstance().update( dt );
 
-		monster_.context.x = monster_.x - Global.getInstance().cameraPos.x;
-		monster_.context.y = monster_.y - Global.getInstance().cameraPos.y;
+		for(monster_ in monsterList)
+		{
+			monster_.context.x = monster_.x - Global.getInstance().cameraPos.x;
+			monster_.context.y = monster_.y - Global.getInstance().cameraPos.y;
+		}
 	}
 
 	function moveCamera( modX : Float, modY : Float ) : Void {

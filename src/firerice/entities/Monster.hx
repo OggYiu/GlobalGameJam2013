@@ -7,11 +7,14 @@ class Monster extends Actor {
 
 	var target_x : Int;
 	var target_y : Int;
-	var move_speed : Float = 2;
+	var move_speed : Float = 50;
 	var wayPointList : Array<Point>;
 
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
+
+		target_x = 0;
+		target_y = 0;
 	}
 
 	public function move (p_x : Int, p_y :Int, p_speed : Float)
@@ -57,22 +60,56 @@ class Monster extends Actor {
 			}
 		}
 		
-		if (this.x < target_x)
+		if (target_x != 0)
 		{
-			this.x += move_speed;
-		}
-		else if (this.x > target_x)
-		{
-			this.x -= move_speed;
+			if (this.x < target_x)
+			{
+				if (this.x + Std.int(move_speed * dt) > target_x)
+				{
+					this.x = target_x;
+				}
+				else
+				{
+					this.x += Std.int(move_speed * dt);
+				}
+			}
+			else if (this.x > target_x)
+			{
+				if (this.x - Std.int(move_speed * dt) < target_x)
+				{
+					this.x = target_x;
+				}
+				else
+				{
+					this.x -= Std.int(move_speed * dt);
+				}
+			}
 		}
 
-		if (this.y < target_y)
+		if (target_y != 0)
 		{
-			this.y += move_speed;
-		}
-		else if (this.y > target_y)
-		{
-			this.y -= move_speed;
+			if (this.y < target_y)
+			{
+				if (this.y + Std.int(move_speed * dt) > target_y)
+				{
+					this.y = target_y;
+				}
+				else
+				{
+					this.y += Std.int(move_speed * dt);
+				}
+			}
+			else if (this.y > target_y)
+			{
+				if (this.y - Std.int(move_speed * dt) < target_y)
+				{
+					this.y = target_y;
+				}
+				else
+				{
+					this.y -= Std.int(move_speed * dt);
+				}
+			}
 		}
 	}
 }
