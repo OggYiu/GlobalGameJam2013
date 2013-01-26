@@ -1,7 +1,6 @@
 package firerice.scenes;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
-import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
 import firerice.common.Global;
 import firerice.core.Entity;
@@ -76,9 +75,11 @@ class SceneGame extends Scene
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 
 		monster_ = new Monster( "monster1");
+		monster_.x = 300;
+		monster_.y = 300;
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
-		monster_.addComponent( new TransformComponent( monster_, 200, 200, 0 ) );
+		// monster_.addComponent( new TransformComponent( monster_, 200, 200, 0 ) );
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
 
 		var points:Array<Point> = new Array<Point>();
@@ -87,8 +88,8 @@ class SceneGame extends Scene
 		points[2] = new Point(150, 150);
 		monster_.setWayPoint(points);
 
-		bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
-		bgMusic_.play( 0, 1000 );
+		// bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
+		// bgMusic_.play( 0, 1000 );
 
 		HeartBeat.getInstance();
 		CollisionManager.getInstance().target = this;
@@ -166,16 +167,23 @@ class SceneGame extends Scene
 
 		moveCamera( modX, modY );
 		CollisionManager.getInstance().update( dt );
+
+		monster_.context.x = monster_.x - Global.getInstance().cameraPos.x;
+		monster_.context.y = monster_.y - Global.getInstance().cameraPos.y;
 	}
 
 	function moveCamera( modX : Float, modY : Float ) : Void {
 		Global.getInstance().cameraPos.x += modX;
 		Global.getInstance().cameraPos.y += modY;
-		floorLayer.x = floorLayer.x - modX * 2;
-		floorLayer.y = floorLayer.y - modY * 2;
 
-		obstaclesLayer.x = obstaclesLayer.x - modX * 2;
-		obstaclesLayer.y = obstaclesLayer.y - modY * 2;
+		// floorLayer.x = floorLayer.x - modX * 2;
+		// floorLayer.y = floorLayer.y - modY * 2;
+		// obstaclesLayer.x = obstaclesLayer.x - modX * 2;
+		// obstaclesLayer.y = obstaclesLayer.y - modY * 2;
+		floorLayer.x = floorLayer.x - modX;
+		floorLayer.y = floorLayer.y - modY;
+		obstaclesLayer.x = obstaclesLayer.x - modX;
+		obstaclesLayer.y = obstaclesLayer.y - modY;
 	}
 
 	function onCollide( boxA : CollisionBox, boxB : CollisionBox ) : Void {

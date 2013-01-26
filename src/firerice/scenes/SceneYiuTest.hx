@@ -1,7 +1,6 @@
 package firerice.scenes;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
-import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;
@@ -31,7 +30,6 @@ class SceneYiuTest extends Scene
 		super( SceneGame.ID, p_parentContext );
 
 		monster_ = new Monster( "monster1", this );
-		monster_.addComponent( new TransformComponent( monster_, 300, 300, 0 ) );
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
 		// var anim : AnimationComponent = cast( monster_.getComponent( AnimationComponent.ID ), AnimationComponent );
 		// anim.animator.setEventReceiver(	this, animationCompleteHandler, animationEventHandler );

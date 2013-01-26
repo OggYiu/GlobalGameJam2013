@@ -1,7 +1,6 @@
 package firerice.scenes;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
-import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;

@@ -31,7 +31,7 @@ class MFrame {
 						colliders : Array<Rectangle>,
 						delayCount : Int,
 						triggerEvent : Bool ) {
-		trace( "colliders.length: " + colliders.length );
+		// trace( "colliders.length: " + colliders.length );
 		Id_ = Id;
 		colliders_ = colliders;
 		frameImages_ = frameImages;

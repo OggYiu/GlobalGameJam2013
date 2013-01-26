@@ -39,7 +39,7 @@ class Monster extends Actor {
 			{
 				if (this.context.x == wayPointList[index].x && this.context.y == wayPointList[index].y)
 				{
-					trace(index);
+					// trace(index);
 
 					if (index == wayPointList.length - 1)
 					{

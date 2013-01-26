@@ -1,7 +1,6 @@
 package firerice.game;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
-import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;
@@ -24,31 +23,46 @@ import nme.media.Sound;
 import com.eclecticdesignstudio.motion.Actuate;
 
 class HeartBeat {
-	public var DEFAULT_FEQUENCE : Int = 1;
-	public var frequence( default, default ) : Int;
+	public var DEFAULT_FEQUENCE : Float = 1;
+	public var MAX_FEQUENCE : Float = 100;
+	public var frequence( default, default ) : Float;
 
-	var sound_ : Sound = null;
+	// var sound_ : Sound = null;
+	var heartBeatA_ : Sound = null;
+	var heartBeatB_ : Sound = null;
 
 	public function new() {
 		// super( "heartBeat" );
 		frequence = DEFAULT_FEQUENCE;
 
-		sound_ = Assets.getSound( "assets/audio/heartbeat.mp3" );
-		playSound();
+		heartBeatA_ = Assets.getSound( "assets/audio/heartbeatA.mp3" );
+		heartBeatB_ = Assets.getSound( "assets/audio/heartbeatB.mp3" );
+		playHeartBeatA();
 		// var soundChannel = sound_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
 		// soundChannel.stop();
 	}
 
-	function playSound() : Void {
-		var soundChannel = sound_.play ();
+	function playHeartBeatA() : Void {
+		var soundChannel = heartBeatA_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
-		soundChannel.addEventListener(Event.SOUND_COMPLETE, onComplete);
+		soundChannel.addEventListener(Event.SOUND_COMPLETE, onHeartBeatAComplete);
+		// soundChannel.stop();
+	}
+
+	function playHeartBeatB() : Void {
+		var soundChannel = heartBeatB_.play ();
+		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
+		soundChannel.addEventListener(Event.SOUND_COMPLETE, onHeartBeatBComplete);
 		// soundChannel.stop();
 	}
 	
-	function onComplete( e : Event ) : Void {
-		Actuate.tween( sound_, 1 / frequence, [] ).onComplete( playSound );
+	function onHeartBeatAComplete( e : Event ) : Void {
+		Actuate.tween( heartBeatA_, ( 1 / frequence ) / 4, [] ).onComplete( playHeartBeatB );
+	}
+
+	function onHeartBeatBComplete( e : Event ) : Void {
+		Actuate.tween( heartBeatA_, (1 / frequence ), [] ).onComplete( playHeartBeatA );
 	}
 
 	static var s_canInit_ : Bool = false;

@@ -1,7 +1,6 @@
 package firerice.core;
 
 import firerice.common.Helper;
-import firerice.components.TransformComponent;
 import firerice.core.Entity;
 //import firerice.events.TransformEvent;
 import firerice.interfaces.IDisplayable;
