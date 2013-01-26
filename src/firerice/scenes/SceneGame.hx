@@ -73,7 +73,7 @@ class SceneGame extends Scene
 		player_.context.x = player_.x = 512;
 		player_.context.y = player_.y = 389;
 		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
-		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/boy" ) );
+		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 
 		monster_ = new Monster( "monster1");
 		this.addChild( monster_ );
