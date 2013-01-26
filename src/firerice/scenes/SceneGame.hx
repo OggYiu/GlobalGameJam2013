@@ -123,13 +123,11 @@ class SceneGame extends Scene
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
-		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
-		*/
 	}
 
 	override function update_( dt : Float ) : Void {
