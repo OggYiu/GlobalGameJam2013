@@ -7,6 +7,7 @@ import haxe.Timer;
 import nme.display.Sprite;
 import nme.events.Event;
 import nme.Lib;
+import nme.display.StageDisplayState;
 
 /**
  * ...
@@ -36,6 +37,10 @@ class Main extends Sprite
 		#end
 		
 		addEventListener( Event.ENTER_FRAME, update );
+		// Lib.current.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+		// Lib.current.stage.scaleMode = nme.display.StageScaleMode.EXACT_FIT;
+		// Lib.current.stage.width = 1024;
+		// Lib.current.stage.height = 768;
 		
 		kernal_ = new Kernal( this );
 	}

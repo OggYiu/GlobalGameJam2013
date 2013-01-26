@@ -34,7 +34,7 @@ import nme.geom.Point;
 class SceneGame extends Scene
 {
 	public static var ID : String = "sceneGame";
-	static var PLAYER_VELOCITY : Float = 8;
+	static var PLAYER_VELOCITY : Float = 300;
 
 	var player_ : Player = null;
 
@@ -101,10 +101,8 @@ class SceneGame extends Scene
 		var modX : Float = 0;
 		var modY : Float = 0;
 		if( InputManager.getInstance().isKeyOnPress( 38 ) ) {
-			modY -= PLAYER_VELOCITY;
-			// player_.x = player_.context.x;
-			player_.y = player_.y - PLAYER_VELOCITY;
-			// player_.y += PLAYER_VELOCITY;
+			modY -= PLAYER_VELOCITY * dt;
+			player_.y = player_.y - PLAYER_VELOCITY * dt;
 
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
@@ -114,15 +112,11 @@ class SceneGame extends Scene
 					player_.currAnimType == ActorAnimType.walkLeft) {
 				player_.playAnim( ActorAnimType.walkLeft );
 			}
-			// floorLayer.y += PLAYER_VELOCITY;
-			// obstaclesLayer.y += PLAYER_VELOCITY;
-			// fogLayer.y += PLAYER_VELOCITY;
-			// enemyCharacterLayer.y += PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 40 ) ) {
-			modY += PLAYER_VELOCITY;
-			player_.y = player_.y + PLAYER_VELOCITY;
-			// player_.y -= PLAYER_VELOCITY;
+			modY += PLAYER_VELOCITY * dt;
+			player_.y = player_.y + PLAYER_VELOCITY * dt;
+
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
 				player_.playAnim( ActorAnimType.walkRight );
@@ -131,30 +125,16 @@ class SceneGame extends Scene
 					player_.currAnimType == ActorAnimType.walkLeft) {
 				player_.playAnim( ActorAnimType.walkLeft );
 			}
-			// floorLayer.y -= PLAYER_VELOCITY;
-			// obstaclesLayer.y -= PLAYER_VELOCITY;
-			// fogLayer.y -= PLAYER_VELOCITY;
-			// enemyCharacterLayer.y -= PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 37 ) ) {
-			modX -= PLAYER_VELOCITY;
-			player_.x = player_.x - PLAYER_VELOCITY;
-			// player_.x += PLAYER_VELOCITY;
+			modX -= PLAYER_VELOCITY * dt;
+			player_.x = player_.x - PLAYER_VELOCITY * dt;
 			player_.playAnim( ActorAnimType.walkLeft );
-			// floorLayer.x += PLAYER_VELOCITY;
-			// obstacesLayer.x += PLAYER_VELOCITY;
-			// fogLayer.x += PLAYER_VELOCITY;
-			// enemyCharacterLayer.x += PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 39 ) ) {
-			modX += PLAYER_VELOCITY;
-			player_.x = player_.x + PLAYER_VELOCITY;
-			// player_.x -= PLAYER_VELOCITY;
+			modX += PLAYER_VELOCITY * dt;
+			player_.x = player_.x + PLAYER_VELOCITY * dt;
 			player_.playAnim( ActorAnimType.walkRight );
-			// floorLayer.x -= PLAYER_VELOCITY;
-			// obstaclesLayer.x -= PLAYER_VELOCITY;
-			// fogLayer.x -= PLAYER_VELOCITY;
-			// enemyCharacterLayer.x -= PLAYER_VELOCITY;
 		}
 		if( !InputManager.getInstance().hasKeyPressed() ) {
 			if( player_.currAnimType == ActorAnimType.walkRight ) {
