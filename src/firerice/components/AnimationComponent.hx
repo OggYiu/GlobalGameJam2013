@@ -22,11 +22,18 @@ class AnimationComponent extends Component, implements IDisplayable
 	public var animator( default, null ) : MAnimationSet;
 	public var context( default, null ) : Sprite;
 	var contextBitmap_ : Bitmap = null;
+	public var target( default, null ) : Entity;
+	public var completeHandler( default, null ) : Void -> Void;
+	public var enterFrameHandler( default, null ) : Void -> Void;
 	
 	public function new( p_owner : Entity, p_animationFilePath : String ) {
 
 		super( AnimationComponent.ID, p_owner );
 		
+		target = null;
+		completeHandler = null;
+		enterFrameHandler = null;
+
 		this.context = new Sprite();
 		contextBitmap_ = new Bitmap();
 		this.context.addChild( contextBitmap_ );
@@ -87,6 +94,9 @@ class AnimationComponent extends Component, implements IDisplayable
 	function AnimationCompleteHandler(	animationSet : MAnimationSet,
 										clipId : Int) : Void {
 		 //trace( "<MGameEntity::AnimationCompleteHandler>" );
+		if( this.target != null &&  this.completeHandler != null ) {
+			Reflect.callMethod( this.target, this.completeHandler, [] );
+		}
 	}
 
 	function AnimationEventHandler(	animationSet : MAnimationSet,
@@ -97,6 +107,9 @@ class AnimationComponent extends Component, implements IDisplayable
 		contextBitmap_.x = frame.frameImages[0].xPos;
 		contextBitmap_.y = frame.frameImages[0].yPos;
 
+		if( this.target != null &&  this.completeHandler != null ) {
+			Reflect.callMethod( this.target, this.enterFrameHandler, [] );
+		}
 		 //trace( "<MGameEntity::AnimationEventHandler>, contextBitmap_.bitmapData: " + contextBitmap_.bitmapData );
 	}
 }

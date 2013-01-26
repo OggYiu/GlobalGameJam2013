@@ -85,12 +85,14 @@ class Actor extends Entity {
 			currentFrame = animComponent.animator.currentFrame;
 			CollisionManager.getInstance().removeCollisionBox( this );
 
-			if( animComponent.animator.currentFrame.colliders.length > 0 ) {
-				// trace( "animComponent.animator.currentFrame.colliders.length > 0!" );
-				for( box in animComponent.animator.currentFrame.colliders ) {
-					CollisionManager.getInstance().addCollisionBox( new CollisionBox( this, box ) );
+			if( animComponent.animator.currentFrame != null && animComponent.animator.currentFrame.colliders != null ) {
+				if( animComponent.animator.currentFrame.colliders.length > 0 ) {
+					// trace( "animComponent.animator.currentFrame.colliders.length > 0!" );
+					for( box in animComponent.animator.currentFrame.colliders ) {
+						CollisionManager.getInstance().addCollisionBox( new CollisionBox( this, box ) );
+					}
+				} else {
 				}
-			} else {
 			}
 		}
 

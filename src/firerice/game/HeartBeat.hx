@@ -30,17 +30,25 @@ class HeartBeat {
 	// var sound_ : Sound = null;
 	var heartBeatA_ : Sound = null;
 	var heartBeatB_ : Sound = null;
+	var heartBeatChannelA_ : nme.media.SoundChannel = null;
+	var heartBeatChannelB_ : nme.media.SoundChannel = null;
 
 	public function new() {
 		// super( "heartBeat" );
 		frequence = DEFAULT_FEQUENCE;
 
-		heartBeatA_ = Assets.getSound( "assets/audio/heartbeatA.mp3" );
-		heartBeatB_ = Assets.getSound( "assets/audio/heartbeatB.mp3" );
-		playHeartBeatA();
 		// var soundChannel = sound_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
 		// soundChannel.stop();
+		heartBeatA_ = Assets.getSound( "assets/audio/heartbeatA.mp3" );
+		heartBeatB_ = Assets.getSound( "assets/audio/heartbeatB.mp3" );
+	}
+
+	public function play() : Void {
+		playHeartBeatA();
+	}
+
+	public function stop() : Void {
 	}
 
 	function playHeartBeatA() : Void {
