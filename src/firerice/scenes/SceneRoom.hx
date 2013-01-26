@@ -43,6 +43,8 @@ class SceneRoom extends Scene
 	public var blackWhiteMap( default, null ) : BitmapData = null;
 	public var floorLayer( default, null ) : Sprite = null;
 
+	var bgMusic_ : Sound = null;
+	var bgChannel_ : nme.media.SoundChannel = null;
 	var exit_ : Bool = false;
 	var player_ : Player = null;
 	public function new( p_parentContext : Sprite ) {
@@ -72,6 +74,9 @@ class SceneRoom extends Scene
 		CollisionManager.getInstance().addCollisionBox( new CollisionBox( null, new Rectangle( 415, 772, 175, 18 ) ) );
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
+
+		bgMusic_ = Assets.getSound ("assets/audio/clockticking.mp3");
+		bgChannel_ = bgMusic_.play( 0, 10000 );
 
 		// test
 		// var bitmap : Bitmap = new Bitmap( blackWhiteMap );
@@ -166,6 +171,8 @@ class SceneRoom extends Scene
 
 		Global.getInstance().cameraPos.x = 0;
 		Global.getInstance().cameraPos.y = 0;
+
+		bgChannel_.stop();
 	}
 
 	function blackWhiteMapHitTest( p_x : Float, p_y : Float, p_width : Float, p_height : Float ) : Bool {

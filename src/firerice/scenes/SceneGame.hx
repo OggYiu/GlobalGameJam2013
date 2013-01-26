@@ -233,6 +233,15 @@ class SceneGame extends Scene
 		Actuate.tween( this.context, 1, { alpha : 0 } ).onComplete( onGameOver );
 		boxA.dead = true;
 		boxB.dead = true;
+
+		var value : Int = Std.int( Math.random() * 4 );
+		trace( value );
+		var sound : Sound = null;
+		if( value <= 0 || value > 4 ) {
+			value = 1;
+		}
+		sound = Assets.getSound( "assets/audio/dead" + value + ".mp3" );
+		sound.play();
 	}
 
 	override function dispose_() : Void {

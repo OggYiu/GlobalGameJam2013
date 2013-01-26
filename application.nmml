@@ -8,7 +8,7 @@
 	<!-- output -->
 	<app main="Main" file="icecream" path="bin" />
 	
-	<window background="#aaaaaa" fps="30" />
+	<window background="#FF0000" fps="30" />
 	<window width="1024" height="768" unless="mobile" />
 	<window fullscreen="true" />
 	<window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
