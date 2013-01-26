@@ -37,7 +37,7 @@ class Monster extends Actor {
 			var index = 0;
 			while (index < wayPointList.length)
 			{
-				if (this.context.x == wayPointList[index].x && this.context.y == wayPointList[index].y)
+				if (this.x == wayPointList[index].x && this.y == wayPointList[index].y)
 				{
 					// trace(index);
 
@@ -57,26 +57,22 @@ class Monster extends Actor {
 			}
 		}
 		
-		if (this.context.x < target_x)
+		if (this.x < target_x)
 		{
-			var _move_speed = (this.context.x + move_speed) >= target_x ? target_x : move_speed;
-			this.context.x += move_speed;
+			this.x += move_speed;
 		}
-		else if (this.context.x > target_x)
+		else if (this.x > target_x)
 		{
-			var _move_speed = (this.context.x - move_speed) <= target_x ? target_x : move_speed;
-			this.context.x -= move_speed;
+			this.x -= move_speed;
 		}
 
-		if (this.context.y < target_y)
+		if (this.y < target_y)
 		{
-			var _move_speed = (this.context.y + move_speed) >= target_y ? target_y : move_speed;
-			this.context.y += move_speed;
+			this.y += move_speed;
 		}
-		else if (this.context.y > target_y)
+		else if (this.y > target_y)
 		{
-			var _move_speed = (this.context.y - move_speed) <= target_y ? target_y : move_speed;
-			this.context.y -= move_speed;
+			this.y -= move_speed;
 		}
 	}
 }
