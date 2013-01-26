@@ -3,6 +3,7 @@ import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
 import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
+import firerice.common.Global;
 import firerice.core.Entity;
 import firerice.core.Scene;
 import firerice.core.InputManager;
@@ -14,6 +15,7 @@ import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
 import firerice.game.HeartBeat;
+import firerice.game.CollisionBox;
 import firerice.game.CollisionManager;
 import nme.Assets;
 import nme.display.Sprite;
@@ -23,6 +25,7 @@ import nme.events.Event;
 import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.media.Sound;
+import nme.geom.Point;
 
 /**
  * ...
@@ -47,7 +50,7 @@ class SceneGame extends Scene
 
 	public function new( p_parentContext : Sprite ) {
 		super( SceneGame.ID, p_parentContext );
-
+		
 		floorLayer = new Sprite();
 		playerCharacterLayer = new Sprite();
 		enemyCharacterLayer = new Sprite();
@@ -59,6 +62,7 @@ class SceneGame extends Scene
 		this.context.addChild( playerCharacterLayer );
 		this.context.addChild( enemyCharacterLayer );
 		this.context.addChild( fogLayer );
+		this.context.addChild( CollisionManager.getInstance().context );
 
 		floorLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
 		obstaclesLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
@@ -81,7 +85,8 @@ class SceneGame extends Scene
 		bgMusic_.play( 0, 1000 );
 
 		HeartBeat.getInstance();
-		CollisionManager.getInstance();
+		CollisionManager.getInstance().target = this;
+		CollisionManager.getInstance().handler = onCollide;
 	}
 
 	override function update_( dt : Float ) : Void {
@@ -154,13 +159,20 @@ class SceneGame extends Scene
 		}
 
 		moveCamera( modX, modY );
+		CollisionManager.getInstance().update( dt );
 	}
 
 	function moveCamera( modX : Float, modY : Float ) : Void {
+		Global.getInstance().cameraPos.x += modX;
+		Global.getInstance().cameraPos.y += modY;
 		floorLayer.x = floorLayer.x - modX * 2;
 		floorLayer.y = floorLayer.y - modY * 2;
 
 		obstaclesLayer.x = obstaclesLayer.x - modX * 2;
 		obstaclesLayer.y = obstaclesLayer.y - modY * 2;
+	}
+
+	function onCollide( boxA : CollisionBox, boxB : CollisionBox ) : Void {
+		trace( "onCollide : " + boxA + ", b: " + boxB );
 	}
 }
