@@ -29,6 +29,7 @@ class Player extends Actor {
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
 
-
+		this.steer = new Steer( this, 60, 0, -54 );
+		this.context.addChild( this.steer.context );
 	}
 }

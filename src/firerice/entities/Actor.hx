@@ -25,10 +25,49 @@ import nme.events.KeyboardEvent;
  * @author oggyiu
  */
 
+enum ActorAnimType {
+	idleRight;
+	idleLeft;
+	walkRight;
+	walkLeft;
+}
+
 class Actor extends Entity {
+	public var steer( default, null ) : Steer = null;
+	public var animComponent( default, null ) : AnimationComponent = null;
+	public var currAnimType( default, null ) : ActorAnimType;
+
+	var firstUpdate_ : Bool = true;
+
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
-
-
 	}
+
+	public function playAnim( type : ActorAnimType ) : Void {
+		switch( type ) {
+			case ActorAnimType.idleRight:
+				this.animComponent.animator.play(0, EOrientation.none, WrapMode.loop, false );
+			case ActorAnimType.idleLeft:
+				this.animComponent.animator.play(1, EOrientation.none, WrapMode.loop, false );
+			case ActorAnimType.walkRight:
+				this.animComponent.animator.play(2, EOrientation.none, WrapMode.loop, false );
+			case ActorAnimType.walkLeft:
+				this.animComponent.animator.play(3, EOrientation.none, WrapMode.loop, false );
+		}
+
+		currAnimType = type;
+	}
+
+	override function update_( dt : Float ) : Void {
+		if( firstUpdate_ ) {
+			this.animComponent = cast( this.getComponent( AnimationComponent.ID ), AnimationComponent );
+			playAnim( ActorAnimType.idleRight );
+			firstUpdate_ = false;
+		}
+
+		super.update_( dt );
+	}
+	// public function move( x : Float, y : Float ) {
+		// var transformComponet : TransformComponent = cast( this.getComponent( TransformComponent.ID ), TransformComponent );
+	// }
 }

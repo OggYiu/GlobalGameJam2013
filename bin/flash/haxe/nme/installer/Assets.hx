@@ -32,6 +32,8 @@ class Assets {
 			resourceTypes.set ("assets/img/bgTile2.png", "image");
 			resourceClasses.set ("assets/img/MAP_001.png", NME_assets_img_map_001_png);
 			resourceTypes.set ("assets/img/MAP_001.png", "image");
+			resourceClasses.set ("assets/img/MAP_002.png", NME_assets_img_map_002_png);
+			resourceTypes.set ("assets/img/MAP_002.png", "image");
 			resourceClasses.set ("assets/fonts/kanji.fnt", NME_assets_fonts_kanji_fnt);
 			resourceTypes.set ("assets/fonts/kanji.fnt", "binary");
 			resourceClasses.set ("assets/fonts/kanji.png", NME_assets_fonts_kanji_png);
@@ -44,6 +46,10 @@ class Assets {
 			resourceTypes.set ("assets/interfaces/stage1.xml", "text");
 			resourceClasses.set ("assets/interfaces/test.xml", NME_assets_interfaces_test_xml);
 			resourceTypes.set ("assets/interfaces/test.xml", "text");
+			resourceClasses.set ("assets/motionwelder/boy.anu", NME_assets_motionwelder_boy_anu);
+			resourceTypes.set ("assets/motionwelder/boy.anu", "binary");
+			resourceClasses.set ("assets/motionwelder/boy.png", NME_assets_motionwelder_boy_png);
+			resourceTypes.set ("assets/motionwelder/boy.png", "image");
 			resourceClasses.set ("assets/motionwelder/monster1.anu", NME_assets_motionwelder_monster1_anu);
 			resourceTypes.set ("assets/motionwelder/monster1.anu", "binary");
 			resourceClasses.set ("assets/motionwelder/monster1.png", NME_assets_motionwelder_monster1_png);

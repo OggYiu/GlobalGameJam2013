@@ -102,6 +102,11 @@ class ApplicationMain {
             return Assets.getBitmapData ("assets/img/MAP_001.png");
          
 		
+		if (inName=="assets/img/MAP_002.png")
+			 
+            return Assets.getBitmapData ("assets/img/MAP_002.png");
+         
+		
 		if (inName=="assets/fonts/kanji.fnt")
 			 
             return Assets.getBytes ("assets/fonts/kanji.fnt");
@@ -130,6 +135,16 @@ class ApplicationMain {
 		if (inName=="assets/interfaces/test.xml")
 			 
 			 return Assets.getText ("assets/interfaces/test.xml");
+         
+		
+		if (inName=="assets/motionwelder/boy.anu")
+			 
+            return Assets.getBytes ("assets/motionwelder/boy.anu");
+         
+		
+		if (inName=="assets/motionwelder/boy.png")
+			 
+            return Assets.getBitmapData ("assets/motionwelder/boy.png");
          
 		
 		if (inName=="assets/motionwelder/monster1.anu")
@@ -164,12 +179,15 @@ class ApplicationMain {
 
 class NME_assets_img_bgtile2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_img_map_001_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_img_map_002_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_fonts_kanji_fnt extends nme.utils.ByteArray { }
 class NME_assets_fonts_kanji_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_fonts_pf_ronda_seven_ttf extends nme.text.Font { }
 class NME_assets_interfaces_game_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_stage1_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_test_xml extends nme.utils.ByteArray { }
+class NME_assets_motionwelder_boy_anu extends nme.utils.ByteArray { }
+class NME_assets_motionwelder_boy_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_motionwelder_monster1_anu extends nme.utils.ByteArray { }
 class NME_assets_motionwelder_monster1_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 

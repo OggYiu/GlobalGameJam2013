@@ -29,6 +29,9 @@ class Entity extends Process, implements IEntityCollection, implements IComponen
 	public var components( default, null ) : Hash<Component> = null;
 	public var type( default, null ) : EEntityType;
 	public var parent( default, null ) : Dynamic = null;
+	public var x( default, setX ) : Float;
+	public var y( default, setY ) : Float;
+	public var z( default, setZ ) : Float;
 	
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id );
@@ -206,5 +209,23 @@ class Entity extends Process, implements IEntityCollection, implements IComponen
 	
 	public function willTrigger(type : String) : Bool {
 		return this.context.willTrigger( type );
+	}
+
+	function setX( value : Float ) : Float {
+		x = value;
+		this.context.x = x;
+		return x;
+	}
+	
+	function setY( value : Float ) : Float {
+		y = value;
+		this.context.y = y;
+		return y;
+	}
+	
+	function setZ( value : Float ) : Float {
+		z = value;
+		// this.context.z = z;
+		return z;
 	}
 }

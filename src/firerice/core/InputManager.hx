@@ -45,6 +45,21 @@ class InputManager {
 		return keymap.get( keycode + "" );
 	}
 
+	public function hasKeyPressed() : Bool {
+		for( elem in keymap ) {
+			// trace( "elem: " + elem );
+			// if( keymap.get( key ) ) {
+			// 	return true;
+			// }
+
+			if( elem ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	static var s_canInit_ : Bool = false;
 	static var s_instance_ : InputManager = null;
 	public static function getInstance() : InputManager {

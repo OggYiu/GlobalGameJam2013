@@ -27,5 +27,6 @@ class LivingRoom extends Entity
 		super( p_id, p_parent );
 
 		this.context.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
+		this.context.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
 	}
 }
