@@ -63,6 +63,12 @@ class CollisionManager extends Process, implements IDisplayable {
 		// collisionBoxs.push( collisionBox );
 	}
 
+	public function reset() : Void {
+		this.target = null;
+		this.handler = null;
+		collisionBoxes.splice( 0, collisionBoxes.length );
+	}
+
 	override function update_( dt : Float ) : Void {
 		super.update_( dt );
 
@@ -75,6 +81,10 @@ class CollisionManager extends Process, implements IDisplayable {
 			var cameraPos : Point = Global.getInstance().cameraPos;
 			// trace( "cameraPos: " + cameraPos );
 			for( box in collisionBoxes ) {
+				if( box.dead ) {
+					continue;
+				}
+				// trace( "box: " + box );
 				this.context.graphics.moveTo(	box.rect.x - cameraPos.x,
 												box.rect.y - cameraPos.y );
 				this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
@@ -93,13 +103,18 @@ class CollisionManager extends Process, implements IDisplayable {
 				if( boxA == boxB ) {
 					continue;
 				}
+				if( boxA.dead || boxB.dead ) {
+					continue;
+				}
 				if( boxA.owner == boxB.owner ) {
 					continue;
 				}
 
 				if( hitTest(	boxA.rect.x, boxA.rect.y, boxA.rect.width, boxA.rect.height,
 								boxB.rect.x, boxB.rect.y, boxB.rect.width, boxB.rect.height ) ) {
-					Reflect.callMethod( target, handler, [ boxA, boxB ] );
+					if( target != null && handler != null ) {
+						Reflect.callMethod( target, handler, [ boxA, boxB ] );
+					}
 				}
 			}
 		}

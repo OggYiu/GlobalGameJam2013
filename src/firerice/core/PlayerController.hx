@@ -1,18 +1,18 @@
-package firerice.entities;
+package firerice.core;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
 import firerice.components.CommandComponent;
+import firerice.common.Helper;
 import firerice.core.Entity;
 import firerice.core.Scene;
-import firerice.core.InputManager;
 import firerice.entities.Monster;
 import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
-import firerice.game.CollisionManager;
-import firerice.game.CollisionBox;
 import nme.Assets;
+import nme.Lib;
+import nme.geom.Point;
 import nme.display.Sprite;
 import nme.display.Bitmap;
 import nme.display.BitmapData;
@@ -20,15 +20,19 @@ import nme.events.Event;
 import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 
-/**
- * ...
- * @author oggyiu
- */
+class PlayerController {
+	public function new() {
+	}
 
-class Player extends Actor {
-	public static var PLAYER_VELOCITY : Float = 300;
-	
-	public function new( p_id : String, ?p_parent : Dynamic ) {
-		super( p_id, p_parent );
+	static var s_canInit_ : Bool = false;
+	static var s_instance_ : PlayerController = null;
+	public static function getInstance() : PlayerController {
+		if ( s_instance_ == null ) {
+			s_canInit_ = true;
+			s_instance_ = new PlayerController();
+			s_canInit_ = false;
+		}
+
+		return s_instance_;
 	}
 }
