@@ -25,11 +25,19 @@ import nme.geom.Rectangle;
 import com.eclecticdesignstudio.motion.Actuate;
 
 class CollisionBox {
-	public var owner( default, null ) : Player;
+	public var owner( default, null ) : Actor;
 	public var rect( default, null ) : Rectangle;
 
-	public function new( p_owner : Player, p_rect : Rectangle ) : Void {
+	public function new( p_owner : Actor, p_rect : Rectangle ) : Void {
 		owner = p_owner;
-		rect = p_rect;
+		rect = new Rectangle( p_rect.x + owner.x, p_rect.y + owner.y, p_rect.width, p_rect.height );
+
+		// trace( "rect.x: " + rect.x + ", rect.y: " + rect.y );
+	}
+
+	public function toString() : String {
+		var output : String = "";
+		output += "x: " + rect.x + ", y: " + rect.y + ", width: " + rect.width + ", height: " + rect.height;
+		return output;
 	}
 }

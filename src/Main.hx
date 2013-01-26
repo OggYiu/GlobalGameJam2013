@@ -33,19 +33,20 @@ class Main extends Sprite
 		#if iphone
 		Lib.current.stage.addEventListener(Event.RESIZE, init);
 		#else
-		addEventListener(Event.ADDED_TO_STAGE, init);
+		addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		#end
 		
 		addEventListener( Event.ENTER_FRAME, update );
-		// Lib.current.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-		// Lib.current.stage.scaleMode = nme.display.StageScaleMode.EXACT_FIT;
+		Lib.current.stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+		Lib.current.stage.scaleMode = nme.display.StageScaleMode.NO_BORDER;
+		Lib.current.stage.align = nme.display.StageAlign.TOP_LEFT;
 		// Lib.current.stage.width = 1024;
 		// Lib.current.stage.height = 768;
 		
 		kernal_ = new Kernal( this );
 	}
 
-	private function init(e) 
+	private function onAddedToStage(e)
 	{
 	}
 	

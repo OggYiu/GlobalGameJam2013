@@ -24,6 +24,7 @@ import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.media.Sound;
 import nme.geom.Rectangle;
+import nme.geom.Point;
 import com.eclecticdesignstudio.motion.Actuate;
 
 class CollisionManager extends Process, implements IDisplayable {
@@ -46,7 +47,7 @@ class CollisionManager extends Process, implements IDisplayable {
 		collisionBoxes.push( collisionBox );
 	}
 
-	public function removeCollisionBox( p_owner : Player ) : Void {
+	public function removeCollisionBox( p_owner : Actor ) : Void {
 		var index : Int = 0;
 		var box : CollisionBox;
 		while( index < collisionBoxes.length ) {
@@ -65,20 +66,27 @@ class CollisionManager extends Process, implements IDisplayable {
 	override function update_( dt : Float ) : Void {
 		super.update_( dt );
 
-		if( lastSize_ != collisionBoxes.length ) {
+		// if( lastSize_ != collisionBoxes.length ) {
 			// trace( "hello!!!" ) ;
 			this.context.graphics.clear();
 			this.context.graphics.lineStyle( 3, 0xFF0000 );
 			lastSize_ = collisionBoxes.length;
 
+			var cameraPos : Point = Global.getInstance().cameraPos;
+			// trace( "cameraPos: " + cameraPos );
 			for( box in collisionBoxes ) {
-				this.context.graphics.moveTo( box.owner.x + box.rect.x - Global.getInstance().cameraPos.x, box.owner.y + box.rect.y - Global.getInstance().cameraPos.y );
-				this.context.graphics.lineTo( box.owner.x + box.rect.x + box.rect.width - Global.getInstance().cameraPos.x, box.owner.y + box.rect.y - Global.getInstance().cameraPos.y );
-				this.context.graphics.lineTo( box.owner.x + box.rect.x + box.rect.width - Global.getInstance().cameraPos.x, box.owner.y + box.rect.y + box.rect.height - Global.getInstance().cameraPos.y );
-				this.context.graphics.lineTo( box.owner.x + box.rect.x - Global.getInstance().cameraPos.x, box.owner.y + box.rect.y + box.rect.height - Global.getInstance().cameraPos.y );
-				this.context.graphics.lineTo( box.owner.x + box.rect.x - Global.getInstance().cameraPos.x, box.owner.y + box.rect.y - Global.getInstance().cameraPos.y );
+				this.context.graphics.moveTo(	box.rect.x - cameraPos.x,
+												box.rect.y - cameraPos.y );
+				this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
+												box.rect.y - cameraPos.y );
+				this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
+												box.rect.y + box.rect.height - cameraPos.y );
+				this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
+												box.rect.y + box.rect.height - cameraPos.y );
+				this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
+												box.rect.y - cameraPos.y );
 			}
-		}
+		// }
 
 		for( boxA in collisionBoxes ) {
 			for( boxB in collisionBoxes ) {
@@ -89,18 +97,22 @@ class CollisionManager extends Process, implements IDisplayable {
 					continue;
 				}
 
-				if( hitTest( boxA, boxB ) ) {
+				if( hitTest(	boxA.rect.x, boxA.rect.y, boxA.rect.width, boxA.rect.height,
+								boxB.rect.x, boxB.rect.y, boxB.rect.width, boxB.rect.height ) ) {
 					Reflect.callMethod( target, handler, [ boxA, boxB ] );
 				}
 			}
 		}
 	}
 
-	function hitTest( boxA : CollisionBox, boxB : CollisionBox ) : Bool {
-  		return !(	( boxA.rect.x ) > ( boxB.rect.x + boxB.rect.width ) || 
-		           	( boxA.rect.x + boxA.rect.width ) < boxB.rect.x || 
-		           	( boxA.rect.y ) > ( boxB.rect.y + boxB.rect.height ) ||
-		           	( boxA.rect.y + boxA.rect.height ) < ( boxB.rect.y ));
+	// function hitTest( boxA : CollisionBox, boxB : CollisionBox ) : Bool {
+ //  		return !(	( boxA.rect.x ) > ( boxB.rect.x + boxB.rect.width ) || 
+	// 	           	( boxA.rect.x + boxA.rect.width ) < boxB.rect.x || 
+	// 	           	( boxA.rect.y ) > ( boxB.rect.y + boxB.rect.height ) ||
+	// 	           	( boxA.rect.y + boxA.rect.height ) < ( boxB.rect.y ));
+	// }
+	function hitTest( x_1 : Float, y_1 : Float, width_1 : Float, height_1 : Float, x_2 : Float, y_2 : Float, width_2 : Float, height_2 : Float ) : Bool {
+		return !(x_1 > x_2+width_2 || x_1+width_1 < x_2 || y_1 > y_2+height_2 || y_1+height_1 < y_2);
 	}
 
 	static var s_canInit_ : Bool = false;

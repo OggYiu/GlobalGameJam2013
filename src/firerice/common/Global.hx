@@ -1,9 +1,12 @@
 package firerice.common;
 
 import nme.geom.Point;
+import firerice.scenes.SceneGame;
 
 class Global {
 	public var cameraPos( default, default ) : Point;
+	public var sceneGame( default, default ) : SceneGame;
+
 	public function new() {
 		cameraPos = new Point( 0, 0 );
 	}

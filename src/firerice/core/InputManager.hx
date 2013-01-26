@@ -12,6 +12,7 @@ import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
 import nme.Assets;
 import nme.Lib;
+import nme.geom.Point;
 import nme.display.Sprite;
 import nme.display.Bitmap;
 import nme.display.BitmapData;
@@ -21,12 +22,19 @@ import nme.events.KeyboardEvent;
 
 class InputManager {
 	public var keymap( default, null ) : Hash<Bool> = null;
+	public var mousePos( default, null ) : Point = null;
+	public var mouseDown( default, null ) : Bool = false;
 
 	public function new() {
 		keymap = new Hash<Bool>();
+		
+		mousePos = new Point( 0, 0 );
 
 		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		Lib.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+		Lib.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		Lib.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown );
+		Lib.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp );
 	}
 
 	
@@ -37,6 +45,20 @@ class InputManager {
 
 	function onKeyUp(event:KeyboardEvent) : Void {
 		keymap.set( event.keyCode + "", false );
+	}
+
+	function onMouseMove( event : MouseEvent ) : Void {
+		// mousePos = new Point( event.mousePos.x, event.mousePos.y 
+		mousePos.x = event.stageX;
+		mousePos.y = event.stageY;
+	}
+
+	function onMouseDown( event : MouseEvent ) : Void {
+		mouseDown = true;
+	}
+
+	function onMouseUp( event : MouseEvent ) : Void {
+		mouseDown = false;
 	}
 
 	public function isKeyOnPress( keycode : Int ) : Bool {
