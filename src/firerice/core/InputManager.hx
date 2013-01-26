@@ -11,7 +11,6 @@ import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
-import firerice.game.LivingRoom;
 import nme.Assets;
 import nme.Lib;
 import nme.display.Sprite;

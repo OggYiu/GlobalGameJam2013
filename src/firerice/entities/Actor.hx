@@ -11,7 +11,6 @@ import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
-import firerice.game.LivingRoom;
 import nme.Assets;
 import nme.display.Sprite;
 import nme.display.Bitmap;
@@ -33,7 +32,6 @@ enum ActorAnimType {
 }
 
 class Actor extends Entity {
-	public var steer( default, null ) : Steer = null;
 	public var animComponent( default, null ) : AnimationComponent = null;
 	public var currAnimType( default, null ) : ActorAnimType;
 
@@ -67,7 +65,4 @@ class Actor extends Entity {
 
 		super.update_( dt );
 	}
-	// public function move( x : Float, y : Float ) {
-		// var transformComponet : TransformComponent = cast( this.getComponent( TransformComponent.ID ), TransformComponent );
-	// }
 }

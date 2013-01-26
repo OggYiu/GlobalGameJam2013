@@ -3,7 +3,6 @@ package firerice.core;
 import firerice.common.Helper;
 import firerice.components.Component;
 import firerice.components.SpriteComponent;
-import firerice.components.TransformComponent;
 import firerice.core.Process;
 import firerice.interfaces.IComponentContainer;
 import firerice.interfaces.IDisplayable;
@@ -59,16 +58,6 @@ class Entity extends Process, implements IEntityCollection, implements IComponen
 		components = new Hash<Component>();
 	}
 	
-	public function load( xml : Xml ) {
-		if ( xml != null ) {
-			initEntity( xml );
-		} else {
-			Helper.assert( false, "<Entity::init_>, xml for init not found!" );
-		}
-		
-		//resolved();
-	}
-	
 	// establish the relationship between component
 	//function resolved() : Void {
 		//for ( component1 in components ) {
@@ -109,64 +98,6 @@ class Entity extends Process, implements IEntityCollection, implements IComponen
 	
 	public function getComponent( componentId : String ) : Component {
 		return components.get( componentId );
-	}
-	
-	function initEntity( xml : Xml ) : Void {
-		// get the first element "actor"
-		var firstElem : Fast = new haxe.xml.Fast( xml.firstElement() );
-		//type = strToEntityType(firstElem.att.type);
-		
-		//var content = haxe.Resource.getString("data_xml");
-		var root = xml.firstElement();
-		var elements = root.elements();
-		while( elements.hasNext() )
-		{
-			var targetXml : Xml = elements.next();
-			var targetNodeName : String = targetXml.nodeName;
-			this.addComponent( readComponent( targetXml ) );
-		}
-		
-		trace( "<Entity::initEntity>, type: " + type );
-	}
-	
-	function readComponent( xml : Xml ) : Component {
-		switch( xml.nodeName ) {
-			case TransformComponent.ID: {
-				// read  position
-				var positionXml : Xml = xml.firstElement();
-				var firstElem : Fast = new haxe.xml.Fast( positionXml );
-				
-				return new TransformComponent(	this, 
-												Std.parseFloat( firstElem.att.x ),
-												Std.parseFloat( firstElem.att.y ),
-												Std.parseFloat( firstElem.att.z ) );
-			}
-			case SpriteComponent.ID: {
-				var elements = xml.elements();
-				var texturePath : String = "";
-				var texturePaths : Array<String> = new Array<String>();
-				while ( elements.hasNext() ) {
-					var elem : Xml = elements.next();
-					
-					switch( elem.nodeName ) {
-						case SpriteComponent.TEXTURE: texturePaths.push( elem.firstChild().nodeValue.toString() );
-					}
-				}
-				
-				//var l_context : Sprite = new Sprite();
-				//l_context.addChild( new Bitmap( Assets.getBitmapData( texturePath ) ) );
-				var bitmapDataCollection : Array<BitmapData> = new Array<BitmapData>();
-				for ( texturePath in texturePaths ) {
-					bitmapDataCollection.push( Assets.getBitmapData( texturePath ) );
-				}
-				return new SpriteComponent( this, bitmapDataCollection );
-			}
-		}
-		
-		#if debug
-		Helper.assert( false, "<Entity::readComponent>, " + xml.nodeName + " not handled" );
-		#end
-		return null;
 	}
 	
 	public function addChild( entity : Entity ) : Void {
@@ -213,13 +144,13 @@ class Entity extends Process, implements IEntityCollection, implements IComponen
 
 	function setX( value : Float ) : Float {
 		x = value;
-		this.context.x = x;
+		// this.context.x = x;
 		return x;
 	}
 	
 	function setY( value : Float ) : Float {
 		y = value;
-		this.context.y = y;
+		// this.context.y = y;
 		return y;
 	}
 	

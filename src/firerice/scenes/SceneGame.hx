@@ -13,7 +13,8 @@ import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
-import firerice.game.LivingRoom;
+import firerice.game.HeartBeat;
+import firerice.game.CollisionManager;
 import nme.Assets;
 import nme.display.Sprite;
 import nme.display.Bitmap;
@@ -31,12 +32,11 @@ import nme.media.Sound;
 class SceneGame extends Scene
 {
 	public static var ID : String = "sceneGame";
-	static var PLAYER_VELOCITY : Float = 10;
+	static var PLAYER_VELOCITY : Float = 8;
 
 	var player_ : Player = null;
 
 	var monster_ : Monster = null;
-	var livingRoom_ : LivingRoom = null;
 	var bgMusic_ : Sound = null;
 
 	public var floorLayer( default, null ) : Sprite = null;
@@ -55,36 +55,44 @@ class SceneGame extends Scene
 		fogLayer = new Sprite();
 
 		this.context.addChild( floorLayer );
+		this.context.addChild( obstaclesLayer );
 		this.context.addChild( playerCharacterLayer );
 		this.context.addChild( enemyCharacterLayer );
-		this.context.addChild( obstaclesLayer );
 		this.context.addChild( fogLayer );
 
-		livingRoom_ = new LivingRoom( "living room" );
-		this.addChild( livingRoom_ );
-		floorLayer.addChild( livingRoom_.context );
+		floorLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
+		obstaclesLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
 
 		player_ = new Player( "player");
 		this.addChild( player_ );
 		playerCharacterLayer.addChild( player_.context );
-		player_.addComponent( new TransformComponent( player_, 100, 100, 0 ) );
+		player_.context.x = player_.x = 512;
+		player_.context.y = player_.y = 389;
+		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/boy" ) );
 
-		monster_ = new Monster( "monster1");
-		this.addChild( monster_ );
-		enemyCharacterLayer.addChild( monster_.context );
-		monster_.addComponent( new TransformComponent( monster_, 300, 300, 0 ) );
-		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
+		// monster_ = new Monster( "monster1");
+		// this.addChild( monster_ );
+		// enemyCharacterLayer.addChild( monster_.context );
+		// monster_.addComponent( new TransformComponent( monster_, 300, 300, 0 ) );
+		// monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
 
 		bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
 		bgMusic_.play( 0, 1000 );
+
+		HeartBeat.getInstance();
+		CollisionManager.getInstance();
 	}
 
 	override function update_( dt : Float ) : Void {
 		super.update_( dt );
+		var modX : Float = 0;
+		var modY : Float = 0;
 		if( InputManager.getInstance().isKeyOnPress( 38 ) ) {
+			modY -= PLAYER_VELOCITY;
 			// player_.x = player_.context.x;
-			player_.y = player_.context.y - PLAYER_VELOCITY;
+			player_.y = player_.y - PLAYER_VELOCITY;
+			// player_.y += PLAYER_VELOCITY;
 
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
@@ -100,7 +108,9 @@ class SceneGame extends Scene
 			// enemyCharacterLayer.y += PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 40 ) ) {
-			player_.y = player_.context.y + PLAYER_VELOCITY;
+			modY += PLAYER_VELOCITY;
+			player_.y = player_.y + PLAYER_VELOCITY;
+			// player_.y -= PLAYER_VELOCITY;
 			if(	player_.currAnimType == ActorAnimType.idleRight ||
 				player_.currAnimType == ActorAnimType.walkRight) {
 				player_.playAnim( ActorAnimType.walkRight );
@@ -115,7 +125,9 @@ class SceneGame extends Scene
 			// enemyCharacterLayer.y -= PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 37 ) ) {
-			player_.x = player_.context.x - PLAYER_VELOCITY;
+			modX -= PLAYER_VELOCITY;
+			player_.x = player_.x - PLAYER_VELOCITY;
+			// player_.x += PLAYER_VELOCITY;
 			player_.playAnim( ActorAnimType.walkLeft );
 			// floorLayer.x += PLAYER_VELOCITY;
 			// obstacesLayer.x += PLAYER_VELOCITY;
@@ -123,7 +135,9 @@ class SceneGame extends Scene
 			// enemyCharacterLayer.x += PLAYER_VELOCITY;
 		}
 		if( InputManager.getInstance().isKeyOnPress( 39 ) ) {
-			player_.x = player_.context.x + PLAYER_VELOCITY;
+			modX += PLAYER_VELOCITY;
+			player_.x = player_.x + PLAYER_VELOCITY;
+			// player_.x -= PLAYER_VELOCITY;
 			player_.playAnim( ActorAnimType.walkRight );
 			// floorLayer.x -= PLAYER_VELOCITY;
 			// obstaclesLayer.x -= PLAYER_VELOCITY;
@@ -138,5 +152,15 @@ class SceneGame extends Scene
 				player_.playAnim( ActorAnimType.idleLeft );
 			}
 		}
+
+		moveCamera( modX, modY );
+	}
+
+	function moveCamera( modX : Float, modY : Float ) : Void {
+		floorLayer.x = floorLayer.x - modX * 2;
+		floorLayer.y = floorLayer.y - modY * 2;
+
+		obstaclesLayer.x = obstaclesLayer.x - modX * 2;
+		obstaclesLayer.y = obstaclesLayer.y - modY * 2;
 	}
 }
