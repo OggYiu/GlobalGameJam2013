@@ -22,6 +22,7 @@ import nme.events.Event;
 import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.media.Sound;
+import flash.geom.Point;
 
 /**
  * ...
@@ -73,8 +74,15 @@ class SceneGame extends Scene
 		monster_ = new Monster( "monster1");
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
-		monster_.addComponent( new TransformComponent( monster_, 300, 300, 0 ) );
+		monster_.addComponent( new TransformComponent( monster_, 200, 200, 0 ) );
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
+
+		var points:Array<Point> = new Array<Point>();
+		points[0] = new Point(300, 200);
+		points[1] = new Point(300, 300);
+		points[2] = new Point(150, 150);
+		monster_.setWayPoint(points);
+		//monster_.move(400, 400, 2);
 
 		bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
 		bgMusic_.play( 0, 1000 );
