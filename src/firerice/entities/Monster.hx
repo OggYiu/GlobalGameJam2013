@@ -2,22 +2,51 @@ package firerice.entities;
 import firerice.core.Entity;
 import com.eclecticdesignstudio.motion.Actuate;
 import flash.geom.Point;
+import firerice.common.Global;
 
 class Monster extends Actor {
 
+	var initial_speed : Float = 50;
+	var trace_speed : Float = 130;
+	var trace_range : Float = 200;
+
 	var target_x : Int;
 	var target_y : Int;
-	var move_speed : Float = 50;
+	var move_speed : Float;
 	var wayPointList : Array<Point>;
+	var isTracePlayer : Bool;
 
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
 
 		target_x = 0;
 		target_y = 0;
+		isTracePlayer = false;
+		move_speed = initial_speed;
 	}
 
-	public function move (p_x : Int, p_y :Int, p_speed : Float)
+	private function tracePlayer()
+	{
+		if (isTracePlayer == false)
+		{	
+			isTracePlayer = true;
+			move_speed = trace_speed;
+		}
+	}
+
+	private function unTracePlayer()
+	{
+		if (isTracePlayer == true)
+		{
+			isTracePlayer = false;
+			move_speed = initial_speed;
+
+			target_x = Std.int(wayPointList[0].x);
+			target_y = Std.int(wayPointList[0].y);
+		}
+	}
+
+	private function move (p_x : Int, p_y :Int, p_speed : Float)
 	{
 		target_x = p_x;
 		target_y = p_y;
@@ -42,8 +71,6 @@ class Monster extends Actor {
 			{
 				if (this.x == wayPointList[index].x && this.y == wayPointList[index].y)
 				{
-					// trace(index);
-
 					if (index == wayPointList.length - 1)
 					{
 						target_x = Std.int(wayPointList[0].x);
@@ -58,6 +85,21 @@ class Monster extends Actor {
 
 				index++;
 			}
+		}
+		
+		if (Point.distance(new Point(Global.getInstance().GameCharacter.x, Global.getInstance().GameCharacter.y), new Point(this.x, this.y)) < trace_range)
+		{
+			this.tracePlayer();
+		}
+		else
+		{
+			this.unTracePlayer();
+		}
+		
+		if (isTracePlayer == true)
+		{
+			target_x = Std.int(Global.getInstance().GameCharacter.x);
+			target_y = Std.int(Global.getInstance().GameCharacter.y);
 		}
 		
 		if (target_x != 0)

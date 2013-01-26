@@ -76,6 +76,7 @@ class SceneGame extends Scene
 		player_.context.y = player_.y = 389;
 		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
+		Global.getInstance().GameCharacter = player_;
 
 		var monster_ = new Monster( "monster1");
 		monster_.x = 300;
