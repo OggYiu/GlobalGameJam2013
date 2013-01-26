@@ -24,6 +24,7 @@ class AnimationComponent extends Component, implements IDisplayable
 	var contextBitmap_ : Bitmap = null;
 	
 	public function new( p_owner : Entity, p_animationFilePath : String ) {
+
 		super( AnimationComponent.ID, p_owner );
 		
 		this.context = new Sprite();
@@ -35,7 +36,7 @@ class AnimationComponent extends Component, implements IDisplayable
 		spriteData = MSpriteLoader.getInstance().loadMSprite( p_animationFilePath, true, ResourceLoader.getInstance() );
 		this.animator = MReader.read( spriteData );
 		this.animator.setEventReceiver( this, AnimationCompleteHandler, AnimationEventHandler );
-		this.animator.play(0, EOrientation.none, WrapMode.single, true );
+		this.animator.play(0, EOrientation.none, WrapMode.loop, true );
 		//this.animator.targetCallbackObj = this;
 		//this.animator.animationCompleteDelegate = AnimationCompleteHandler;
 		//this.animator.animationEventDelegate = AnimationEventHandler;
@@ -92,7 +93,6 @@ class AnimationComponent extends Component, implements IDisplayable
 									animation : MAnimation,
 									frame : MFrame,
 									unknown : Int ) : Void {
-		// trace( "<MGameEntity::AnimationEventHandler>" );
 		contextBitmap_.bitmapData = frame.frameImages[0].bitmapdata;
 		contextBitmap_.x = frame.frameImages[0].xPos;
 		contextBitmap_.y = frame.frameImages[0].yPos;

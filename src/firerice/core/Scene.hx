@@ -9,6 +9,8 @@ import firerice.interfaces.IEntityCollection;
 import minimalcomps.Label;
 import nme.display.Sprite;
 import nme.events.Event;
+import nme.events.MouseEvent;
+import nme.events.KeyboardEvent;
 
 /**
  * ...
@@ -54,4 +56,19 @@ class Scene extends Process, implements IEntityCollection, implements IDisplayab
 		
 		parentContext_.removeChild( context );
 	}
+
+	public function onKeyDown(event:KeyboardEvent) : Void {
+	} 
+
+	public function onKeyUp(event:KeyboardEvent) : Void {
+	} 
+
+	public function onMouseMove(event:MouseEvent) : Void {
+	} 
+
+	public function onMouseUp(event:MouseEvent) : Void {
+	} 
+
+	public function onMouseDown(event:MouseEvent) : Void {
+	} 
 }

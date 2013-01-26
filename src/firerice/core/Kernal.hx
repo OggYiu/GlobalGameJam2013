@@ -3,9 +3,13 @@ package firerice.core;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import firerice.common.Helper;
+import firerice.core.InputManager;
 import firerice.scenes.SceneTest;
 import firerice.scenes.SceneGame;
+import firerice.scenes.SceneYiuTest;
 import nme.display.Sprite;
+import nme.events.KeyboardEvent;
+import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.Lib;
 
@@ -26,11 +30,17 @@ class Kernal extends Process {
 		sceneRegistry_ = new Hash<Class<Scene>>();
 		registerScene( SceneTest.ID, SceneTest );
 		registerScene( SceneGame.ID, SceneGame );
+		registerScene( SceneYiuTest.ID, SceneYiuTest );
+
+		InputManager.getInstance();
 		
-		Lib.stage.addEventListener(KeyboardEvent.KEY_DOWN, reportKeyDown);
+		Lib.stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
+		Lib.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		Lib.stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
 		
-		var startSceneId : String = SceneTest.ID;
-		//var startSceneId : String = SceneGame.ID;
+		// var startSceneId : String = SceneTest.ID;
+		// var startSceneId : String = SceneYiuTest.ID;
+		var startSceneId : String = SceneGame.ID;
 		changeScene( startSceneId );
 	}
 
@@ -77,14 +87,22 @@ class Kernal extends Process {
 		
 		return s_instance_;
 	}
-	
-	function reportKeyDown(event:KeyboardEvent) : Void {
-		//trace( "event.charCode: " + event.charCode );
-		//trace( "event.keyCode: " + event.keyCode );
-		//trace("Key Pressed: " + String.fromCharCode(event.charCode) +         " (character code: " + event.charCode + ")"); 
-		
-		if ( event.keyCode == 116 ) {
-			refreshCurrentScene();
+
+	function onMouseMove(event:MouseEvent) : Void {
+		if ( currentScene != null ) {
+			currentScene.onMouseMove( event );
+		}
+	} 
+
+	function onMouseUp(event:MouseEvent) : Void {
+		if ( currentScene != null ) {
+			currentScene.onMouseUp( event );
+		}
+	} 
+
+	function onMouseDown(event:MouseEvent) : Void {
+		if ( currentScene != null ) {
+			currentScene.onMouseDown( event );
 		}
 	} 
 }

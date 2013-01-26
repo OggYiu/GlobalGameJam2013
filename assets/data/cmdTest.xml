@@ -1,8 +1,0 @@
-<cmd>
-	<command repeat="0">
-		<input>
-			<type>keydown</type>
-			<value></value>
-		</input>
-	</command>
-</cmd>

@@ -22,10 +22,11 @@ import nme.events.IEventDispatcher;
  * @author oggyiu
  */
 
-class Entity extends Process, implements IEntityCollection, implements IDisplayable, implements IEventDispatcher
+class Entity extends Process, implements IEntityCollection, implements IComponentContainer, implements IDisplayable, implements IEventDispatcher
 {
 	public var context( default, null ) : Sprite = null;
 	public var entities( default, null ) : Hash<Entity> = null;
+	public var components( default, null ) : Hash<Component> = null;
 	public var type( default, null ) : EEntityType;
 	public var parent( default, null ) : Dynamic = null;
 	
@@ -52,6 +53,17 @@ class Entity extends Process, implements IEntityCollection, implements IDisplaya
 		//CEntityCollection.setAddChild( this );
 		
 		entities = new Hash<Entity>();
+		components = new Hash<Component>();
+	}
+	
+	public function load( xml : Xml ) {
+		if ( xml != null ) {
+			initEntity( xml );
+		} else {
+			Helper.assert( false, "<Entity::init_>, xml for init not found!" );
+		}
+		
+		//resolved();
 	}
 	
 	// establish the relationship between component
@@ -68,9 +80,50 @@ class Entity extends Process, implements IEntityCollection, implements IDisplaya
 	//}
 	
 	override private function update_( dt : Float ) : Void {
+		for( component in components ) {
+			component.update( dt );
+		}
+		
 		for ( entity in entities ) {
 			entity.update( dt );
 		}
+	}
+	
+	public function addComponent( component : Component ) : Void {
+		#if debug
+		if ( components.get( component.id ) != null ) {
+			Helper.assert( false, "<Entity::addComponent>, component: " + component.id + " already existed!" );
+			return ;
+		}
+		#end
+		
+		components.set( component.id, component );
+	}
+	
+	public function hasComponent( componentId : String ) : Bool {
+		return components.exists( componentId );
+	}
+	
+	public function getComponent( componentId : String ) : Component {
+		return components.get( componentId );
+	}
+	
+	function initEntity( xml : Xml ) : Void {
+		// get the first element "actor"
+		var firstElem : Fast = new haxe.xml.Fast( xml.firstElement() );
+		//type = strToEntityType(firstElem.att.type);
+		
+		//var content = haxe.Resource.getString("data_xml");
+		var root = xml.firstElement();
+		var elements = root.elements();
+		while( elements.hasNext() )
+		{
+			var targetXml : Xml = elements.next();
+			var targetNodeName : String = targetXml.nodeName;
+			this.addComponent( readComponent( targetXml ) );
+		}
+		
+		trace( "<Entity::initEntity>, type: " + type );
 	}
 	
 	function readComponent( xml : Xml ) : Component {

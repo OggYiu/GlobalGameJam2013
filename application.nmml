@@ -25,7 +25,6 @@
 	<assets path="assets/game"/>
 	<assets path="assets/interfaces"/>
 	<assets path="assets/audio"/>
-	<assets path="assets/audio/music" rename="assets/audio/music" type="music" include="*" />
 	<assets path="assets/motionwelder"/>
 	
     <haxedef name="fdb" if="target_flash"/>

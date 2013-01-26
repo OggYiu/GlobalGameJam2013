@@ -92,29 +92,14 @@ class ApplicationMain {
 	public static function getAsset (inName:String):Dynamic {
 		
 		
-		if (inName=="assets/img/background.png")
-			 
-            return Assets.getBitmapData ("assets/img/background.png");
-         
-		
-		if (inName=="assets/img/bgTile.png")
-			 
-            return Assets.getBitmapData ("assets/img/bgTile.png");
-         
-		
 		if (inName=="assets/img/bgTile2.png")
 			 
             return Assets.getBitmapData ("assets/img/bgTile2.png");
          
 		
-		if (inName=="assets/img/issac.png")
+		if (inName=="assets/img/MAP_001.png")
 			 
-            return Assets.getBitmapData ("assets/img/issac.png");
-         
-		
-		if (inName=="assets/img/rogueTile.png")
-			 
-            return Assets.getBitmapData ("assets/img/rogueTile.png");
+            return Assets.getBitmapData ("assets/img/MAP_001.png");
          
 		
 		if (inName=="assets/fonts/kanji.fnt")
@@ -132,41 +117,6 @@ class ApplicationMain {
 			 return Assets.getFont ("assets/fonts/pf_ronda_seven.ttf");
 		 
 		
-		if (inName=="assets/game/check.png")
-			 
-            return Assets.getBitmapData ("assets/game/check.png");
-         
-		
-		if (inName=="assets/game/cross.png")
-			 
-            return Assets.getBitmapData ("assets/game/cross.png");
-         
-		
-		if (inName=="assets/game/layout.png")
-			 
-            return Assets.getBitmapData ("assets/game/layout.png");
-         
-		
-		if (inName=="assets/game/leftPic.png")
-			 
-            return Assets.getBitmapData ("assets/game/leftPic.png");
-         
-		
-		if (inName=="assets/game/monk.png")
-			 
-            return Assets.getBitmapData ("assets/game/monk.png");
-         
-		
-		if (inName=="assets/game/rightPic.png")
-			 
-            return Assets.getBitmapData ("assets/game/rightPic.png");
-         
-		
-		if (inName=="assets/game/youwin.png")
-			 
-            return Assets.getBitmapData ("assets/game/youwin.png");
-         
-		
 		if (inName=="assets/interfaces/game.xml")
 			 
 			 return Assets.getText ("assets/interfaces/game.xml");
@@ -182,39 +132,14 @@ class ApplicationMain {
 			 return Assets.getText ("assets/interfaces/test.xml");
          
 		
-		if (inName=="assets/audio/music/shuffle_001.mp3")
+		if (inName=="assets/motionwelder/monster1.anu")
 			 
-            return Assets.getSound ("assets/audio/music/shuffle_001.mp3");
-		 
-		
-		if (inName=="assets/audio/sound/correct.mp3")
-			 
-            return Assets.getSound ("assets/audio/sound/correct.mp3");
-		 
-		
-		if (inName=="assets/audio/sound/wrong.mp3")
-			 
-            return Assets.getSound ("assets/audio/sound/wrong.mp3");
-		 
-		
-		if (inName=="assets/audio/sound/youwin.mp3")
-			 
-            return Assets.getSound ("assets/audio/sound/youwin.mp3");
-		 
-		
-		if (inName=="assets/audio/music/shuffle_001.mp3")
-			 
-            return Assets.getSound ("assets/audio/music/shuffle_001.mp3");
-		 
-		
-		if (inName=="assets/motionwelder/characters.anu")
-			 
-            return Assets.getBytes ("assets/motionwelder/characters.anu");
+            return Assets.getBytes ("assets/motionwelder/monster1.anu");
          
 		
-		if (inName=="assets/motionwelder/characters.png")
+		if (inName=="assets/motionwelder/monster1.png")
 			 
-            return Assets.getBitmapData ("assets/motionwelder/characters.png");
+            return Assets.getBitmapData ("assets/motionwelder/monster1.png");
          
 		
 		
@@ -237,29 +162,14 @@ class ApplicationMain {
 }
 
 
-class NME_assets_img_background_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_img_bgtile_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_img_bgtile2_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_img_issac_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_img_roguetile_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_img_map_001_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_fonts_kanji_fnt extends nme.utils.ByteArray { }
 class NME_assets_fonts_kanji_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_fonts_pf_ronda_seven_ttf extends nme.text.Font { }
-class NME_assets_game_check_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_cross_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_layout_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_leftpic_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_monk_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_rightpic_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-class NME_assets_game_youwin_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_interfaces_game_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_stage1_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_test_xml extends nme.utils.ByteArray { }
-class NME_assets_audio_music_shuffle_001_mp3 extends nme.media.Sound { }
-class NME_assets_audio_sound_correct_mp3 extends nme.media.Sound { }
-class NME_assets_audio_sound_wrong_mp3 extends nme.media.Sound { }
-class NME_assets_audio_sound_youwin_mp3 extends nme.media.Sound { }
-class NME_assets_audio_music_shuffle_2 extends nme.media.Sound { }
-class NME_assets_motionwelder_characters_anu extends nme.utils.ByteArray { }
-class NME_assets_motionwelder_characters_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_motionwelder_monster1_anu extends nme.utils.ByteArray { }
+class NME_assets_motionwelder_monster1_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 
