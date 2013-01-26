@@ -31,6 +31,9 @@ enum ActorAnimType {
 	idleLeft;
 	walkRight;
 	walkLeft;
+	transform;
+	runRight;
+	runLeft;
 }
 
 class Actor extends Entity {
@@ -45,16 +48,25 @@ class Actor extends Entity {
 		super( p_id, p_parent );
 	}
 
-	public function playAnim( type : ActorAnimType ) : Void {
+	public function playAnim( type : ActorAnimType, ?wrapmode : WrapMode ) : Void {
+		if( wrapmode == null ) {
+			wrapmode = WrapMode.loop;
+		}
 		switch( type ) {
 			case ActorAnimType.idleRight:
-				this.animComponent.animator.play(0, EOrientation.none, WrapMode.loop, false );
+				this.animComponent.animator.play(0, EOrientation.none, wrapmode, false );
 			case ActorAnimType.idleLeft:
-				this.animComponent.animator.play(1, EOrientation.none, WrapMode.loop, false );
+				this.animComponent.animator.play(1, EOrientation.none, wrapmode, false );
 			case ActorAnimType.walkRight:
-				this.animComponent.animator.play(2, EOrientation.none, WrapMode.loop, false );
+				this.animComponent.animator.play(2, EOrientation.none, wrapmode, false );
 			case ActorAnimType.walkLeft:
-				this.animComponent.animator.play(3, EOrientation.none, WrapMode.loop, false );
+				this.animComponent.animator.play(3, EOrientation.none, wrapmode, false );
+			case ActorAnimType.transform:
+				this.animComponent.animator.play(4, EOrientation.none, wrapmode, false );
+			case ActorAnimType.runRight:
+				this.animComponent.animator.play(5, EOrientation.none, wrapmode, false );
+			case ActorAnimType.runLeft:
+				this.animComponent.animator.play(6, EOrientation.none, wrapmode, false );
 		}
 
 		currAnimType = type;

@@ -105,11 +105,11 @@ class SceneGame extends Scene
 		enemyCharacterLayer.addChild( monster_.context );
 		monster_.context.x = monster_.x = 300;
 		monster_.context.y = monster_.y = 300;
-		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
+		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
 		var points:Array<Point> = new Array<Point>();
-		points[0] = new Point(300, 200);
-		points[1] = new Point(300, 300);
-		points[2] = new Point(150, 150);
+		points[0] = new Point(300, 300);
+		points[1] = new Point(200, 400);
+		points[2] = new Point(150, 250);
 		monster_.setWayPoint(points);
 		monsterList.push(monster_);
 
@@ -122,11 +122,13 @@ class SceneGame extends Scene
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
+		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
+		*/
 	}
 
 	override function update_( dt : Float ) : Void {

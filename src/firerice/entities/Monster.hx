@@ -3,6 +3,9 @@ import firerice.core.Entity;
 import com.eclecticdesignstudio.motion.Actuate;
 import flash.geom.Point;
 import firerice.common.Global;
+import firerice.entities.Actor;
+import firerice.core.motionwelder.MAnimationSet;
+import firerice.core.motionwelder.MReader;
 
 class Monster extends Actor {
 
@@ -15,6 +18,7 @@ class Monster extends Actor {
 	var move_speed : Float;
 	var wayPointList : Array<Point>;
 	var isTracePlayer : Bool;
+	var isTransforming : Bool;
 
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
@@ -22,6 +26,7 @@ class Monster extends Actor {
 		target_x = 0;
 		target_y = 0;
 		isTracePlayer = false;
+		isTransforming = false;
 		move_speed = initial_speed;
 	}
 
@@ -31,6 +36,12 @@ class Monster extends Actor {
 		{	
 			isTracePlayer = true;
 			move_speed = trace_speed;
+
+			if (this.currAnimType != ActorAnimType.transform)
+			{
+				isTransforming = true;
+				this.playAnim( ActorAnimType.transform , WrapMode.once );
+			}
 		}
 	}
 
@@ -106,6 +117,11 @@ class Monster extends Actor {
 		{
 			if (this.x < target_x)
 			{
+				if (this.currAnimType != ActorAnimType.walkRight && !isTransforming)
+				{
+					this.playAnim( ActorAnimType.walkRight );
+				}
+
 				if (this.x + Std.int(move_speed * dt) > target_x)
 				{
 					this.x = target_x;
@@ -117,6 +133,11 @@ class Monster extends Actor {
 			}
 			else if (this.x > target_x)
 			{
+				if (this.currAnimType != ActorAnimType.walkLeft && !isTransforming)
+				{
+					this.playAnim( ActorAnimType.walkLeft );
+				}
+
 				if (this.x - Std.int(move_speed * dt) < target_x)
 				{
 					this.x = target_x;
