@@ -102,18 +102,23 @@ class SceneGame extends Scene
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 		Global.getInstance().GameCharacter = player_;
 
-		var monster_ = new Monster( "monster1");
-		this.addChild( monster_ );
-		enemyCharacterLayer.addChild( monster_.context );
-		monster_.context.x = monster_.x = 250;
-		monster_.context.y = monster_.y = 250;
-		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
 		var points:Array<Point> = new Array<Point>();
 		points[0] = new Point(280, 280);
 		points[1] = new Point(200, 400);
 		points[2] = new Point(150, 250);
-		monster_.setWayPoint(points);
-		monsterList.push(monster_);
+		this.createMonster(250, 250, points);
+
+		var points2:Array<Point> = new Array<Point>();
+		points2[0] = new Point(620, 700);
+		points2[1] = new Point(530, 710);
+		points2[2] = new Point(650, 650);
+		this.createMonster(700, 700, points2);
+
+		var points3:Array<Point> = new Array<Point>();
+		points3[0] = new Point(950, 750);
+		points3[1] = new Point(850, 800);
+		points3[2] = new Point(900, 700);
+		this.createMonster(900, 600, points3);
 
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
@@ -123,11 +128,25 @@ class SceneGame extends Scene
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
+		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
+		*/
+	}
+
+	private function createMonster(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	{
+		var monster_ = new Monster("monster" + monsterList.length + 1);
+		this.addChild( monster_ );
+		enemyCharacterLayer.addChild( monster_.context );
+		monster_.context.x = monster_.x = p_x;
+		monster_.context.y = monster_.y = p_y;
+		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
+		monster_.setWayPoint(p_wayPoints);
+		monsterList.push(monster_);
 	}
 
 	override function update_( dt : Float ) : Void {
