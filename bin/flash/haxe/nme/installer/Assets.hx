@@ -40,6 +40,8 @@ class Assets {
 			resourceTypes.set ("assets/fonts/kanji.png", "image");
 			resourceClasses.set ("assets/fonts/pf_ronda_seven.ttf", NME_assets_fonts_pf_ronda_seven_ttf);
 			resourceTypes.set ("assets/fonts/pf_ronda_seven.ttf", "font");
+			resourceClasses.set ("assets/game/swf.zip", NME_assets_game_swf_zip);
+			resourceTypes.set ("assets/game/swf.zip", "binary");
 			resourceClasses.set ("assets/interfaces/game.xml", NME_assets_interfaces_game_xml);
 			resourceTypes.set ("assets/interfaces/game.xml", "text");
 			resourceClasses.set ("assets/interfaces/stage1.xml", NME_assets_interfaces_stage1_xml);

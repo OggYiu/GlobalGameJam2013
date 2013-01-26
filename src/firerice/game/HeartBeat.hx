@@ -24,15 +24,28 @@ import nme.events.KeyboardEvent;
 import nme.media.Sound;
 
 class HeartBeat extends Process {
+	public var frequence( default, default ) : Int;
+
 	var sound_ : Sound = null;
 
 	public function new() {
 		super( "heartBeat" );
+		frequence = 1;
 
 		sound_ = Assets.getSound( "assets/audio/heartbeat.mp3" );
+		var soundChannel = sound_.play ();
+		soundChannel.addEventListener (Event.COMPLETE, onComplete );
+		// soundChannel.stop();
 	}
 
-	public function stop() : Void {
+	function playSound() : Void {
+		var soundChannel = sound_.play ();
+		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
+		// soundChannel.stop();
+	}
+	
+	function onComplete( e : Event ) : Void {
+		Actuate.tween( sound_, 1 / frequence, {} ).onComplete( sound_, playSound ) );
 	}
 
 	static var s_canInit_ : Bool = false;

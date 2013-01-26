@@ -122,6 +122,11 @@ class ApplicationMain {
 			 return Assets.getFont ("assets/fonts/pf_ronda_seven.ttf");
 		 
 		
+		if (inName=="assets/game/swf.zip")
+			 
+            return Assets.getBytes ("assets/game/swf.zip");
+         
+		
 		if (inName=="assets/interfaces/game.xml")
 			 
 			 return Assets.getText ("assets/interfaces/game.xml");
@@ -193,6 +198,7 @@ class NME_assets_img_map_002_png extends nme.display.BitmapData { public functio
 class NME_assets_fonts_kanji_fnt extends nme.utils.ByteArray { }
 class NME_assets_fonts_kanji_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_fonts_pf_ronda_seven_ttf extends nme.text.Font { }
+class NME_assets_game_swf_zip extends nme.utils.ByteArray { }
 class NME_assets_interfaces_game_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_stage1_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_test_xml extends nme.utils.ByteArray { }

@@ -77,7 +77,7 @@ class SceneGame extends Scene
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
 
 		bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
-		bgMusic_.play ();
+		bgMusic_.play( 0, 1000 );
 	}
 
 	override function update_( dt : Float ) : Void {
