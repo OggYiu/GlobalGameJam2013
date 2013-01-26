@@ -1,4 +1,5 @@
 package firerice.entities;
+import firerice.common.Global;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
 import firerice.components.CommandComponent;
@@ -10,6 +11,8 @@ import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
+import firerice.game.CollisionManager;
+import firerice.game.CollisionBox;
 import nme.Assets;
 import nme.display.Sprite;
 import nme.display.Bitmap;
@@ -33,6 +36,8 @@ enum ActorAnimType {
 class Actor extends Entity {
 	public var animComponent( default, null ) : AnimationComponent = null;
 	public var currAnimType( default, null ) : ActorAnimType;
+	public var currentFrame( default, null ) : MFrame = null;
+
 
 	var firstUpdate_ : Bool = true;
 
@@ -63,5 +68,21 @@ class Actor extends Entity {
 		}
 
 		super.update_( dt );
+
+		if( currentFrame != animComponent.animator.currentFrame ) {
+			currentFrame = animComponent.animator.currentFrame;
+			CollisionManager.getInstance().removeCollisionBox( this );
+
+			if( animComponent.animator.currentFrame.colliders.length > 0 ) {
+				// trace( "animComponent.animator.currentFrame.colliders.length > 0!" );
+				for( box in animComponent.animator.currentFrame.colliders ) {
+					CollisionManager.getInstance().addCollisionBox( new CollisionBox( this, box ) );
+				}
+			} else {
+			}
+		}
+
+		this.context.x = this.x - Global.getInstance().cameraPos.x;
+		this.context.y = this.y - Global.getInstance().cameraPos.y;
 	}
 }

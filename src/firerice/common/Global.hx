@@ -1,6 +1,7 @@
 package firerice.common;
 
 import nme.geom.Point;
+import firerice.scenes.SceneGame;
 import firerice.entities.Player;
 
 class Global {
@@ -8,6 +9,8 @@ class Global {
 	public var GameCharacter : Player;
 
 	public var cameraPos( default, default ) : Point;
+	public var sceneGame( default, default ) : SceneGame;
+
 	public function new() {
 		cameraPos = new Point( 0, 0 );
 	}

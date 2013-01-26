@@ -26,7 +26,7 @@ class UIScrollBg extends Entity {
 	
 	public function new(	p_id : String,
 							p_parent : IEntityCollection,
-							bitmapData : BitmapData,
+							p_bitmapData : BitmapData,
 							x : Float,
 							y : Float,
 							width : Int,
@@ -38,7 +38,7 @@ class UIScrollBg extends Entity {
 		
 		var spriteComponent : SpriteComponent;
 		
-		source_ = bitmapData.clone();
+		source_ = p_bitmapData.clone();
 		rows_ = Math.ceil( height / source_.height );
 		cols_ = Math.ceil( width / source_.width );
 		if( !Helper.isZero( velocityX ) ) {
@@ -74,6 +74,7 @@ class UIScrollBg extends Entity {
 				bitmapDataCollection.push( bitmapData );
 				// bitmap.x = startX_;
 				// bitmap.y = startY_;
+				this.context.addChild( new Bitmap( bitmapData ) );
 				//l_context.addChild( bitmap );
 				// bitmap.visible = false;
 				//bitmaps_.push( bitmap );
@@ -81,11 +82,11 @@ class UIScrollBg extends Entity {
 		}
 
 		
-		for ( bitmapData in p_bitmapData ) {
-			var bitmap : Bitmap = new Bitmap( bitmapData );
-			bitmapCollection.push( bitmap );
-			this.context.addChild( bitmap );
-		}
+		// for ( bitmapData in bitmapDataCollection ) {
+		// 	var bitmap : Bitmap = new Bitmap( bitmapData );
+		// 	// bitmapCollection.push( bitmap );
+		// 	this.context.addChild( bitmap );
+		// }
 		
 		// chopchop( true );
 		updateBitmapsPosition();
