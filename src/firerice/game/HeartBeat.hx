@@ -45,23 +45,41 @@ class HeartBeat {
 	}
 
 	public function play() : Void {
+		heartBeatChannelA_ = null;
+		heartBeatChannelB_ = null;
 		playHeartBeatA();
 	}
 
 	public function stop() : Void {
+		if( heartBeatChannelA_ != null ) {
+			heartBeatChannelA_.stop();
+		}
+		if( heartBeatChannelB_ != null ) {
+			heartBeatChannelB_.stop();
+		}
 	}
 
 	function playHeartBeatA() : Void {
-		var soundChannel = heartBeatA_.play ();
+		if( heartBeatChannelB_ != null ) {
+			heartBeatChannelB_.stop();
+			heartBeatChannelB_ = null;
+		}
+
+		heartBeatChannelA_ = heartBeatA_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
-		soundChannel.addEventListener(Event.SOUND_COMPLETE, onHeartBeatAComplete);
+		heartBeatChannelA_.addEventListener(Event.SOUND_COMPLETE, onHeartBeatAComplete);
 		// soundChannel.stop();
 	}
 
 	function playHeartBeatB() : Void {
-		var soundChannel = heartBeatB_.play ();
+		if( heartBeatChannelA_ != null ) {
+			heartBeatChannelA_.stop();
+			heartBeatChannelA_ = null;
+		}
+
+		heartBeatChannelB_ = heartBeatB_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
-		soundChannel.addEventListener(Event.SOUND_COMPLETE, onHeartBeatBComplete);
+		heartBeatChannelB_.addEventListener(Event.SOUND_COMPLETE, onHeartBeatBComplete);
 		// soundChannel.stop();
 	}
 	
