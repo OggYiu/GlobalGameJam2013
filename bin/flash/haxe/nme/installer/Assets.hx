@@ -46,6 +46,10 @@ class Assets {
 			resourceTypes.set ("assets/interfaces/stage1.xml", "text");
 			resourceClasses.set ("assets/interfaces/test.xml", NME_assets_interfaces_test_xml);
 			resourceTypes.set ("assets/interfaces/test.xml", "text");
+			resourceClasses.set ("assets/audio/bg.mp3", NME_assets_audio_bg_mp3);
+			resourceTypes.set ("assets/audio/bg.mp3", "music");
+			resourceClasses.set ("assets/audio/heartbeat.mp3", NME_assets_audio_heartbeat_mp3);
+			resourceTypes.set ("assets/audio/heartbeat.mp3", "music");
 			resourceClasses.set ("assets/motionwelder/boy.anu", NME_assets_motionwelder_boy_anu);
 			resourceTypes.set ("assets/motionwelder/boy.anu", "binary");
 			resourceClasses.set ("assets/motionwelder/boy.png", NME_assets_motionwelder_boy_png);

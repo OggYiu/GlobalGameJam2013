@@ -137,6 +137,16 @@ class ApplicationMain {
 			 return Assets.getText ("assets/interfaces/test.xml");
          
 		
+		if (inName=="assets/audio/bg.mp3")
+			 
+            return Assets.getSound ("assets/audio/bg.mp3");
+		 
+		
+		if (inName=="assets/audio/heartbeat.mp3")
+			 
+            return Assets.getSound ("assets/audio/heartbeat.mp3");
+		 
+		
 		if (inName=="assets/motionwelder/boy.anu")
 			 
             return Assets.getBytes ("assets/motionwelder/boy.anu");
@@ -186,6 +196,8 @@ class NME_assets_fonts_pf_ronda_seven_ttf extends nme.text.Font { }
 class NME_assets_interfaces_game_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_stage1_xml extends nme.utils.ByteArray { }
 class NME_assets_interfaces_test_xml extends nme.utils.ByteArray { }
+class NME_assets_audio_bg_mp3 extends nme.media.Sound { }
+class NME_assets_audio_heartbeat_mp3 extends nme.media.Sound { }
 class NME_assets_motionwelder_boy_anu extends nme.utils.ByteArray { }
 class NME_assets_motionwelder_boy_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_motionwelder_monster1_anu extends nme.utils.ByteArray { }

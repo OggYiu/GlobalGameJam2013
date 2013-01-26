@@ -21,6 +21,7 @@ import nme.display.BitmapData;
 import nme.events.Event;
 import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
+import nme.media.Sound;
 
 /**
  * ...
@@ -36,6 +37,7 @@ class SceneGame extends Scene
 
 	var monster_ : Monster = null;
 	var livingRoom_ : LivingRoom = null;
+	var bgMusic_ : Sound = null;
 
 	public var floorLayer( default, null ) : Sprite = null;
 	public var playerCharacterLayer( default, null ) : Sprite = null;
@@ -73,6 +75,9 @@ class SceneGame extends Scene
 		enemyCharacterLayer.addChild( monster_.context );
 		monster_.addComponent( new TransformComponent( monster_, 300, 300, 0 ) );
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/monster1" ) );
+
+		bgMusic_ = Assets.getSound ("assets/audio/bg.mp3");
+		bgMusic_.play ();
 	}
 
 	override function update_( dt : Float ) : Void {
