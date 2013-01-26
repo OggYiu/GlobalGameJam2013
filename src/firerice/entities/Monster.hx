@@ -11,7 +11,7 @@ class Monster extends Actor {
 
 	var initial_speed : Float = 50;
 	var trace_speed : Float = 130;
-	var trace_range : Float = 200;
+	var trace_range : Float = 250;
 
 	var target_x : Int;
 	var target_y : Int;
@@ -19,6 +19,7 @@ class Monster extends Actor {
 	var wayPointList : Array<Point>;
 	var isTracePlayer : Bool;
 	var isTransforming : Bool;
+	var isTransfored : Bool;
 
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
@@ -27,6 +28,7 @@ class Monster extends Actor {
 		target_y = 0;
 		isTracePlayer = false;
 		isTransforming = false;
+		isTransfored = false;
 		move_speed = initial_speed;
 	}
 
@@ -37,9 +39,11 @@ class Monster extends Actor {
 			isTracePlayer = true;
 			move_speed = trace_speed;
 
-			if (this.currAnimType != ActorAnimType.transform)
+			if (this.currAnimType != ActorAnimType.transform && !isTransfored)
 			{
 				isTransforming = true;
+				this.animComponent.target = this;
+				this.animComponent.completeHandler = completeHandler;
 				this.playAnim( ActorAnimType.transform , WrapMode.once );
 			}
 		}
@@ -69,6 +73,12 @@ class Monster extends Actor {
 		wayPointList = p_pointAry;
 		target_x = Std.int(wayPointList[0].x);
 		target_y = Std.int(wayPointList[0].y);
+	}
+
+	private function completeHandler()
+	{
+		isTransforming = false;
+		isTransfored = true;
 	}
 
 	override function update_( dt : Float ) : Void 
@@ -113,13 +123,17 @@ class Monster extends Actor {
 			target_y = Std.int(Global.getInstance().GameCharacter.y);
 		}
 		
-		if (target_x != 0)
+		if (target_x != 0 && !isTransforming)
 		{
 			if (this.x < target_x)
 			{
-				if (this.currAnimType != ActorAnimType.walkRight && !isTransforming)
+				if (this.currAnimType != ActorAnimType.walkRight && !isTransfored)
 				{
 					this.playAnim( ActorAnimType.walkRight );
+				}
+				else if (isTransfored)
+				{
+					this.playAnim( ActorAnimType.runRight );
 				}
 
 				if (this.x + Std.int(move_speed * dt) > target_x)
@@ -133,9 +147,13 @@ class Monster extends Actor {
 			}
 			else if (this.x > target_x)
 			{
-				if (this.currAnimType != ActorAnimType.walkLeft && !isTransforming)
+				if (this.currAnimType != ActorAnimType.walkLeft && !isTransfored)
 				{
 					this.playAnim( ActorAnimType.walkLeft );
+				}
+				else if (isTransfored)
+				{
+					this.playAnim( ActorAnimType.runLeft );
 				}
 
 				if (this.x - Std.int(move_speed * dt) < target_x)
@@ -147,30 +165,30 @@ class Monster extends Actor {
 					this.x -= Std.int(move_speed * dt);
 				}
 			}
-		}
 
-		if (target_y != 0)
-		{
-			if (this.y < target_y)
+			if (target_y != 0)
 			{
-				if (this.y + Std.int(move_speed * dt) > target_y)
+				if (this.y < target_y)
 				{
-					this.y = target_y;
+					if (this.y + Std.int(move_speed * dt) > target_y)
+					{
+						this.y = target_y;
+					}
+					else
+					{
+						this.y += Std.int(move_speed * dt);
+					}
 				}
-				else
+				else if (this.y > target_y)
 				{
-					this.y += Std.int(move_speed * dt);
-				}
-			}
-			else if (this.y > target_y)
-			{
-				if (this.y - Std.int(move_speed * dt) < target_y)
-				{
-					this.y = target_y;
-				}
-				else
-				{
-					this.y -= Std.int(move_speed * dt);
+					if (this.y - Std.int(move_speed * dt) < target_y)
+					{
+						this.y = target_y;
+					}
+					else
+					{
+						this.y -= Std.int(move_speed * dt);
+					}
 				}
 			}
 		}

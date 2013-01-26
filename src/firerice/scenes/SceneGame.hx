@@ -105,11 +105,11 @@ class SceneGame extends Scene
 		var monster_ = new Monster( "monster1");
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
-		monster_.context.x = monster_.x = 300;
-		monster_.context.y = monster_.y = 300;
+		monster_.context.x = monster_.x = 250;
+		monster_.context.y = monster_.y = 250;
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
 		var points:Array<Point> = new Array<Point>();
-		points[0] = new Point(300, 300);
+		points[0] = new Point(280, 280);
 		points[1] = new Point(200, 400);
 		points[2] = new Point(150, 250);
 		monster_.setWayPoint(points);
