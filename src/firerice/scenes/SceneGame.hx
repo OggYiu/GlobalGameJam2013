@@ -119,7 +119,7 @@ class SceneGame extends Scene
 		bgChannel_ = bgMusic_.play( 0, 10000 );
 		// bgChannel.soundTransform.volume = 0.0;
 
-		HeartBeat.getInstance();
+		HeartBeat.getInstance().play();
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
@@ -241,6 +241,7 @@ class SceneGame extends Scene
 		Global.getInstance().cameraPos.x = 0;
 		Global.getInstance().cameraPos.y = 0;
 		bgChannel_.stop();
+		HeartBeat.getInstance().stop();
 	}
 
 	function onGameOver() : Void {
