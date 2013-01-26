@@ -1,7 +1,6 @@
 package firerice.types;
 import firerice.core.Scene;
 import firerice.common.Helper;
-import firerice.ui.TouchCollideBox;
 import minimalcomps.CheckBox;
 import minimalcomps.Component;
 import minimalcomps.HBox;

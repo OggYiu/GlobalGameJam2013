@@ -283,9 +283,10 @@ class MPlayer {
 			orientation=(orientation>>1);
 			
 			drawImageClip(outputArray,x,y,imageId,clipIndex,orientation);
-		} else {
-			throw "<MPlayer::drwaClip>, unhandled case : " + flag;
 		}
+		// else {
+		// 	throw "<MPlayer::drwaClip>, unhandled case : " + flag;
+		// }
 		// else if(flag == ELLIPSE_FLAG_NONE || flag == ELLIPSE_FLAG_FILLED) {
 		// 	//[w][h][startAngle][endAngle][color]
 		// 	var index : Int = clipIndex*5;

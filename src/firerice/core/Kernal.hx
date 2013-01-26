@@ -18,6 +18,8 @@ class Kernal extends Process {
 
 	var sceneRegistry_ : Hash<Class<Scene>> = null;
 	var canvas_ : Sprite = null;
+	public var screenWidth( default, default ) : Float;
+	public var screenHeight( default, default ) : Float;
 	
 	public function new( canvas : Sprite ) {
 		//Helper.assert( s_canInit_, "you cannot init the class in this way!" );
@@ -26,6 +28,9 @@ class Kernal extends Process {
 		s_instance_ = this;
 		super( null );
 		
+		screenWidth = Lib.stage.width;
+		screenHeight = Lib.stage.height;
+
 		canvas_ = canvas;
 		sceneRegistry_ = new Hash<Class<Scene>>();
 		registerScene( SceneTest.ID, SceneTest );

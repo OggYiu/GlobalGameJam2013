@@ -5,6 +5,10 @@ import firerice.components.TransformComponent;
 import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;
+import firerice.core.Process;
+import firerice.core.InputManager;
+import firerice.entities.Actor;
+import firerice.entities.Player;
 import firerice.entities.Monster;
 import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
@@ -15,18 +19,18 @@ import nme.display.Sprite;
 import nme.display.Bitmap;
 import nme.display.BitmapData;
 import nme.events.Event;
+import nme.events.MouseEvent;
+import nme.events.KeyboardEvent;
+import nme.media.Sound;
+import nme.geom.Rectangle;
+import com.eclecticdesignstudio.motion.Actuate;
 
-/**
- * ...
- * @author oggyiu
- */
+class CollisionBox {
+	public var owner( default, null ) : Player;
+	public var rect( default, null ) : Rectangle;
 
-class LivingRoom extends Entity
-{
-	public function new( p_id : String, ?p_parent : Dynamic ) {
-		super( p_id, p_parent );
-
-		this.context.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
-		this.context.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
+	public function new( p_owner : Player, p_rect : Rectangle ) : Void {
+		owner = p_owner;
+		rect = p_rect;
 	}
 }

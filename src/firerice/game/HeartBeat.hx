@@ -1,4 +1,4 @@
-package firerice.scenes;
+package firerice.game;
 import firerice.components.AnimationComponent;
 import firerice.components.SpriteComponent;
 import firerice.components.TransformComponent;
@@ -13,7 +13,6 @@ import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
 import firerice.types.EOrientation;
-import firerice.game.LivingRoom;
 import nme.Assets;
 import nme.display.Sprite;
 import nme.display.Bitmap;
@@ -22,30 +21,34 @@ import nme.events.Event;
 import nme.events.MouseEvent;
 import nme.events.KeyboardEvent;
 import nme.media.Sound;
+import com.eclecticdesignstudio.motion.Actuate;
 
-class HeartBeat extends Process {
+class HeartBeat {
+	public var DEFAULT_FEQUENCE : Int = 1;
 	public var frequence( default, default ) : Int;
 
 	var sound_ : Sound = null;
 
 	public function new() {
-		super( "heartBeat" );
-		frequence = 1;
+		// super( "heartBeat" );
+		frequence = DEFAULT_FEQUENCE;
 
 		sound_ = Assets.getSound( "assets/audio/heartbeat.mp3" );
-		var soundChannel = sound_.play ();
-		soundChannel.addEventListener (Event.COMPLETE, onComplete );
+		playSound();
+		// var soundChannel = sound_.play ();
+		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
 		// soundChannel.stop();
 	}
 
 	function playSound() : Void {
 		var soundChannel = sound_.play ();
 		// soundChannel.addEventListener (Event.COMPLETE, onComplete );
+		soundChannel.addEventListener(Event.SOUND_COMPLETE, onComplete);
 		// soundChannel.stop();
 	}
 	
 	function onComplete( e : Event ) : Void {
-		Actuate.tween( sound_, 1 / frequence, {} ).onComplete( sound_, playSound ) );
+		Actuate.tween( sound_, 1 / frequence, [] ).onComplete( playSound );
 	}
 
 	static var s_canInit_ : Bool = false;
