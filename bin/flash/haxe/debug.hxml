@@ -10,7 +10,7 @@
 -D web
 -swf-version 10.1
 -swf9 bin/flash/bin/icecream.swf
--swf-header 200:150:30:aaaaaa
+-swf-header 1024:768:30:aaaaaa
 -cp bin/flash/haxe
 --no-inline
 -debug

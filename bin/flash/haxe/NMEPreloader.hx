@@ -57,13 +57,13 @@ class NMEPreloader extends Sprite
 	
 	public function getHeight():Float
 	{
-		return 150;
+		return 768;
 	}
 	
 	
 	public function getWidth():Float
 	{
-		return 200;
+		return 1024;
 	}
 	
 	

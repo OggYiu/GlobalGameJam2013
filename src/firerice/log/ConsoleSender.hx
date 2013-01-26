@@ -15,7 +15,7 @@ class ConsoleSender {
   
   public function new () {
     console_connection_ = new LocalConnection();
-    // console_connection_.addEventListener( StatusEvent.STATUS, onStatusEventHandler );
+    console_connection_.addEventListener( StatusEvent.STATUS, onStatusEventHandler );
     backup_trace_func_ = haxe.Log.trace;
     haxe.Log.trace = sendToConsole;
   }

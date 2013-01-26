@@ -79,8 +79,13 @@ class UIScrollBg extends Entity {
 				//bitmaps_.push( bitmap );
 			}
 		}
-		var spriteComponent : SpriteComponent = new SpriteComponent( this, bitmapDataCollection );
-		this.addComponent( spriteComponent );
+
+		
+		for ( bitmapData in p_bitmapData ) {
+			var bitmap : Bitmap = new Bitmap( bitmapData );
+			bitmapCollection.push( bitmap );
+			this.context.addChild( bitmap );
+		}
 		
 		// chopchop( true );
 		updateBitmapsPosition();
