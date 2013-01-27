@@ -100,6 +100,9 @@ class Monster extends Actor {
 	{
 		super.update_( dt );
 
+		var backupX : Float = this.x;
+		var backupY : Float = this.y;
+
 		if (wayPointList != null)
 		{
 			var index = 0;
@@ -207,6 +210,17 @@ class Monster extends Actor {
 					{
 						this.y -= Std.int(move_speed * dt);
 					}
+				}
+			}
+		}
+
+		// map collision detection
+		if( Global.getInstance().sceneGame != null ) {
+			if( this.currentFrame.colliders.length > 0 ) {
+				var rect : nme.geom.Rectangle = this.currentFrame.colliders[0];
+				if( Global.getInstance().sceneGame.blackWhiteMapHitTest( this.x + rect.x, this.y + rect.y, rect.width, rect.height ) ) {
+					this.x = backupX;
+					this.y = backupY;
 				}
 			}
 		}

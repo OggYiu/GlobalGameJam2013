@@ -80,22 +80,22 @@ class CollisionManager extends Process, implements IDisplayable {
 
 			var cameraPos : Point = Global.getInstance().cameraPos;
 			// trace( "cameraPos: " + cameraPos );
-			for( box in collisionBoxes ) {
-				if( box.dead ) {
-					continue;
-				}
-				// trace( "box: " + box );
-				this.context.graphics.moveTo(	box.rect.x - cameraPos.x,
-												box.rect.y - cameraPos.y );
-				this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
-												box.rect.y - cameraPos.y );
-				this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
-												box.rect.y + box.rect.height - cameraPos.y );
-				this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
-												box.rect.y + box.rect.height - cameraPos.y );
-				this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
-												box.rect.y - cameraPos.y );
-			}
+			// for( box in collisionBoxes ) {
+			// 	if( box.dead ) {
+			// 		continue;
+			// 	}
+			// 	// trace( "box: " + box );
+			// 	this.context.graphics.moveTo(	box.rect.x - cameraPos.x,
+			// 									box.rect.y - cameraPos.y );
+			// 	this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
+			// 									box.rect.y - cameraPos.y );
+			// 	this.context.graphics.lineTo(	box.rect.x + box.rect.width - cameraPos.x,
+			// 									box.rect.y + box.rect.height - cameraPos.y );
+			// 	this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
+			// 									box.rect.y + box.rect.height - cameraPos.y );
+			// 	this.context.graphics.lineTo(	box.rect.x - cameraPos.x,
+			// 									box.rect.y - cameraPos.y );
+			// }
 		// }
 
 		for( boxA in collisionBoxes ) {
