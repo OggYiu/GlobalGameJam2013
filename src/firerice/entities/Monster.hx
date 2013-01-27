@@ -12,7 +12,7 @@ class Monster extends Actor {
 	var initial_speed : Float = 50;
 	var trace_speed : Float = 140;
 	var detection_range : Float = 160;
-	var trace_range : Float = 320;
+	var trace_range : Float = 310;
 
 	var target_x : Int;
 	var target_y : Int;
@@ -216,7 +216,7 @@ class Monster extends Actor {
 
 		// map collision detection
 		if( Global.getInstance().sceneGame != null ) {
-			if( this.currentFrame.colliders.length > 0 ) {
+			if( this.currentFrame != null && this.currentFrame.colliders != null && this.currentFrame.colliders.length > 0 ) {
 				var rect : nme.geom.Rectangle = this.currentFrame.colliders[0];
 				if( Global.getInstance().sceneGame.blackWhiteMapHitTest( this.x + rect.x, this.y + rect.y, rect.width, rect.height ) ) {
 					this.x = backupX;

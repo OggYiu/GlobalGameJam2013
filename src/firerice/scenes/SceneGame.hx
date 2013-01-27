@@ -123,30 +123,30 @@ class SceneGame extends Scene
 			this.createMonster(1600, 1200, points, "assets/motionwelder/npc_boy2");
 
 			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(100, 350);
-			points[1] = new Point(200, 450);
-			points[2] = new Point(200, 550);
-			this.createMonster(150, 350, points, "assets/motionwelder/npc_boy3");
+			points[0] = new Point(400, 350);
+			points[1] = new Point(300, 450);
+			points[2] = new Point(4500, 550);
+			this.createVictim(350, 350, points, "assets/motionwelder/npc_boy");
 
 			var points:Array<Point> = new Array<Point>();
 			points[0] = new Point(300, 1350);
 			points[1] = new Point(400, 1250);
 			points[2] = new Point(450, 1150);
-			this.createVictim(350, 1200, points, "assets/motionwelder/npc_boy");
+			this.createMonster(350, 1200, points, "assets/motionwelder/npc_boy3");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1200, 1200);
+			points[1] = new Point(1300, 1300);
+			points[2] = new Point(1100, 1200);
+			this.createMonster(1250, 1250, points, "assets/motionwelder/npc_boy4");
 		}
 		else if (Global.getInstance().currentLevel == 2)
 		{
 			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(100, 400);
-			points[1] = new Point(200, 300);
-			points[2] = new Point(100, 500);
-			this.createMonster(200, 250, points, "assets/motionwelder/npc_boy");
-
-			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(1000, 1350);
-			points[1] = new Point(1200, 1450);
-			points[2] = new Point(1200, 1550);
-			this.createMonster(1150, 1350, points, "assets/motionwelder/npc_boy3");
+			points[0] = new Point(200, 400);
+			points[1] = new Point(300, 300);
+			points[2] = new Point(200, 500);
+			this.createMonster(300, 250, points, "assets/motionwelder/npc_boy");
 
 			var points:Array<Point> = new Array<Point>();
 			points[0] = new Point(500, 1350);
@@ -167,16 +167,22 @@ class SceneGame extends Scene
 			this.createMonster(150, 1350, points, "assets/motionwelder/npc_boy5");
 
 			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(1200, 1250);
-			points[1] = new Point(1220, 1300);
-			points[2] = new Point(1250, 1250);
-			this.createMonster(1100, 1150, points, "assets/motionwelder/npc_boy");
+			points[0] = new Point(1100, 1050);
+			points[1] = new Point(1250, 1150);
+			points[2] = new Point(1200, 1050);
+			this.createMonster(1250, 1100, points, "assets/motionwelder/npc_boy3");
 
 			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(1300, 1350);
-			points[1] = new Point(1400, 1250);
-			points[2] = new Point(1450, 1150);
-			this.createVictim(1350, 1200, points, "assets/motionwelder/npc_boy2");
+			points[0] = new Point(1200, 850);
+			points[1] = new Point(1220, 900);
+			points[2] = new Point(1250, 950);
+			this.createMonster(1200, 1000, points, "assets/motionwelder/npc_boy");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1300, 1150);
+			points[1] = new Point(1400, 1050);
+			points[2] = new Point(1450, 950);
+			this.createVictim(1350, 1100, points, "assets/motionwelder/npc_boy2");
 		}
 		else if (Global.getInstance().currentLevel == 3)
 		{
@@ -261,10 +267,10 @@ class SceneGame extends Scene
 			this.createMonster(220, 1950, points, "assets/motionwelder/npc_boy5");
 
 			var points:Array<Point> = new Array<Point>();
-			points[0] = new Point(1280, 1880);
-			points[1] = new Point(1370, 1900);
-			points[2] = new Point(1250, 1850);
-			this.createMonster(1220, 1950, points, "assets/motionwelder/npc_boy5");
+			points[0] = new Point(1180, 1680);
+			points[1] = new Point(1270, 1700);
+			points[2] = new Point(1150, 1650);
+			this.createMonster(1120, 1650, points, "assets/motionwelder/npc_boy5");
 
 			var points:Array<Point> = new Array<Point>();
 			points[0] = new Point(1700, 780);
@@ -272,6 +278,7 @@ class SceneGame extends Scene
 			points[1] = new Point(1500, 800);
 			this.createVictim(1550, 850, points, "assets/motionwelder/npc_boy3");
 		}
+
 
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
@@ -291,11 +298,13 @@ class SceneGame extends Scene
 			// CollisionManager.getInstance().addCollisionBox();
 		}
 		
+		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
+		*/
 
 		// interface
 		// var heartBar : ProgressBar = new ProgressBar( this.interfaceLayer, 80, 40 );
