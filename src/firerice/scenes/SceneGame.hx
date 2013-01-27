@@ -31,6 +31,7 @@ import nme.geom.Point;
 import nme.geom.Rectangle;
 import nme.Lib;
 import com.eclecticdesignstudio.motion.Actuate;
+import minimalcomps.VSlider;
 
 /**
  * ...
@@ -58,6 +59,7 @@ class SceneGame extends Scene
 	public var enemyCharacterLayer( default, null ) : Sprite = null;
 	public var obstaclesLayer( default, null ) : Sprite = null;
 	public var fogLayer( default, null ) : Sprite = null;
+	public var interfaceLayer( default, null ) : Sprite = null;
 
 	public function new( p_parentContext : Sprite ) {
 		super( SceneGame.ID, p_parentContext );
@@ -71,6 +73,7 @@ class SceneGame extends Scene
 		enemyCharacterLayer = new Sprite();
 		obstaclesLayer = new Sprite();
 		fogLayer = new Sprite();
+		interfaceLayer = new Sprite();
 		monsterList = new Array<Monster>();
 
 		// scrollBg_ = new UIScrollBg("scrollBg",
@@ -89,7 +92,9 @@ class SceneGame extends Scene
 		this.context.addChild( playerCharacterLayer );
 		this.context.addChild( enemyCharacterLayer );
 		this.context.addChild( fogLayer );
+		this.context.addChild( interfaceLayer );
 		this.context.addChild( CollisionManager.getInstance().context );
+
 
 		floorLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
 		obstaclesLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
@@ -141,6 +146,13 @@ class SceneGame extends Scene
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
 		*/
+
+		// interface
+		// var barHeight : Float = 400;
+		// var slider : VSlider = new VSlider( this.interfaceLayer, 40, 100 );
+		// slider.width = 20;
+		// slider.height = barHeight;
+		// slider.value = ;
 	}
 
 	private function createMonster(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)

@@ -26,10 +26,13 @@ class AnimationComponent extends Component, implements IDisplayable
 	public var completeHandler( default, default ) : Void -> Void;
 	public var enterFrameHandler( default, default ) : Void -> Void;
 	
-	public function new( p_owner : Entity, p_animationFilePath : String ) {
-
+	public function new( p_owner : Entity, p_animationFilePath : String, ?p_specificImagePath : String ) {
 		super( AnimationComponent.ID, p_owner );
 		
+		if( p_specificImagePath == null ) {
+			p_specificImagePath = p_animationFilePath;
+		}
+
 		target = null;
 		completeHandler = null;
 		enterFrameHandler = null;
@@ -40,7 +43,7 @@ class AnimationComponent extends Component, implements IDisplayable
 		this.owner.context.addChild( this.context );
 		
 		var spriteData : MSpriteData;
-		spriteData = MSpriteLoader.getInstance().loadMSprite( p_animationFilePath, true, ResourceLoader.getInstance() );
+		spriteData = MSpriteLoader.getInstance().loadMSprite( p_animationFilePath, true, ResourceLoader.getInstance(), p_specificImagePath );
 		this.animator = MReader.read( spriteData );
 		this.animator.setEventReceiver( this, AnimationCompleteHandler, AnimationEventHandler );
 		this.animator.play(0, EOrientation.none, WrapMode.loop, true );
