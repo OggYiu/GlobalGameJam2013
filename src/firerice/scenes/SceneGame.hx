@@ -180,8 +180,8 @@ class SceneGame extends Scene
 
 			var points:Array<Point> = new Array<Point>();
 			points[0] = new Point(1300, 1150);
-			points[1] = new Point(1400, 1050);
-			points[2] = new Point(1450, 950);
+			points[1] = new Point(1350, 1050);
+			points[2] = new Point(1400, 950);
 			this.createVictim(1350, 1100, points, "assets/motionwelder/npc_boy2");
 		}
 		else if (Global.getInstance().currentLevel == 3)
@@ -298,13 +298,11 @@ class SceneGame extends Scene
 			// CollisionManager.getInstance().addCollisionBox();
 		}
 		
-		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
-		*/
 
 		// interface
 		// var heartBar : ProgressBar = new ProgressBar( this.interfaceLayer, 80, 40 );
