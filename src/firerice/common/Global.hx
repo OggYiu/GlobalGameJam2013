@@ -3,13 +3,16 @@ package firerice.common;
 import nme.geom.Point;
 import firerice.scenes.SceneGame;
 import firerice.entities.Player;
+import firerice.entities.Victim;
 
 class Global {
 
-	public var GameCharacter : Player;
+	public var GameCharacter : Player = null;
 
 	public var cameraPos( default, default ) : Point;
 	public var sceneGame( default, default ) : SceneGame;
+	public var victim( default, default ) : Victim;
+	public var currentLevel( default, default ) : Int = 1;
 
 	public function new() {
 		cameraPos = new Point( 0, 0 );

@@ -24,7 +24,9 @@ class Monster extends Actor {
 
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
+		isEnemy = true;
 
+		playerType = ActorEntityType.monster;
 		target_x = 0;
 		target_y = 0;
 		isTracePlayer = false;

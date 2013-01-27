@@ -32,7 +32,8 @@ import nme.geom.Point;
 import nme.geom.Rectangle;
 import nme.Lib;
 import com.eclecticdesignstudio.motion.Actuate;
-import minimalcomps.VSlider;
+// import minimalcomps.VSlider;
+import minimalcomps.ProgressBar;
 
 /**
  * ...
@@ -61,6 +62,7 @@ class SceneGame extends Scene
 	public var obstaclesLayer( default, null ) : Sprite = null;
 	public var fogLayer( default, null ) : Sprite = null;
 	public var interfaceLayer( default, null ) : Sprite = null;
+	public var gameWon( default, default ) : Bool = false;
 
 	public function new( p_parentContext : Sprite ) {
 		super( SceneGame.ID, p_parentContext );
@@ -155,6 +157,11 @@ class SceneGame extends Scene
 		*/
 
 		// interface
+		// var heartBar : ProgressBar = new ProgressBar( this.interfaceLayer, 80, 40 );
+		// heartBar.width = 800;
+		// heartBar.height = 20;
+
+
 		// var barHeight : Float = 400;
 		// var slider : VSlider = new VSlider( this.interfaceLayer, 40, 100 );
 		// slider.width = 20;
@@ -196,6 +203,7 @@ class SceneGame extends Scene
 		victim_.addComponent( new AnimationComponent( victim_, animationFilePath, "assets/motionwelder/npc_boy" ) );
 		victim_.setWayPoint(p_wayPoints);
 		monsterList.push(victim_);
+		Global.getInstance().victim = victim_;
 	}
 
 	override function update_( dt : Float ) : Void {
@@ -268,6 +276,7 @@ class SceneGame extends Scene
 		moveCamera( modX, modY );
 
 		CollisionManager.getInstance().update( dt );
+		HeartBeat.getInstance().update( dt );
 	}
 
 	function blackWhiteMapHitTest( p_x : Float, p_y : Float, p_width : Float, p_height : Float ) : Bool {
@@ -306,7 +315,16 @@ class SceneGame extends Scene
 		if( value <= 0 || value > 4 ) {
 			value = 1;
 		}
-		sound = Assets.getSound( "assets/audio/dead" + value + ".mp3" );
+
+		HeartBeat.getInstance().stop();
+		bgChannel_.stop();
+
+		if( !this.gameWon ) {
+			sound = Assets.getSound( "assets/audio/dead" + value + ".mp3" );
+		} else {
+			sound = Assets.getSound( "assets/audio/girlLaugh.mp3" );
+			++Global.getInstance().currentLevel;
+		}
 		sound.play();
 	}
 
@@ -315,11 +333,11 @@ class SceneGame extends Scene
 
 		Global.getInstance().cameraPos.x = 0;
 		Global.getInstance().cameraPos.y = 0;
-		bgChannel_.stop();
-		HeartBeat.getInstance().stop();
+		HeartBeat.getInstance().frequence = 1;
 	}
 
 	function onGameOver() : Void {
+		this.gameWon = false;
 		CollisionManager.getInstance().reset();
 		Global.getInstance().sceneGame = null;
 		Kernal.getInstance().changeScene( SceneRoom.ID );

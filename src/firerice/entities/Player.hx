@@ -5,6 +5,7 @@ import firerice.components.CommandComponent;
 import firerice.core.Entity;
 import firerice.core.Scene;
 import firerice.core.InputManager;
+import firerice.entities.Actor;
 import firerice.entities.Monster;
 import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
@@ -30,5 +31,8 @@ class Player extends Actor {
 	
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
+		isEnemy = false;
+
+		playerType = ActorEntityType.player;
 	}
 }
