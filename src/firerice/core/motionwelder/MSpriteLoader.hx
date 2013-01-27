@@ -37,7 +37,7 @@ import nme.events.Event;
 		}
 	}
 
- 	public function loadMSprite( fileName:String, splitImageClips:Bool, imageloader:MSpriteImageLoader ) : MSpriteData {
+ 	public function loadMSprite( fileName:String, splitImageClips:Bool, imageloader:MSpriteImageLoader, specificImagePath : String ) : MSpriteData {
 		// trace( "MSpriteLoader 1" );
 		if(imageloader == null){
 			throw "Image Loader cannot be null";
@@ -164,7 +164,7 @@ import nme.events.Event;
 							orientationUsedInStudio |= (flag&0x07);
 						}
 
-						imageArrayForClips[j] = imageloader.loadImageClip(fileName,i,x,y,w,h,(orientationUsedInStudio>>1)); 
+						imageArrayForClips[j] = imageloader.loadImageClip(specificImagePath,i,x,y,w,h,(orientationUsedInStudio>>1)); 
 						// trace( "orientationUsedInStudio>>1: " + (orientationUsedInStudio>>1) );
 						// trace( "imageArrayForClips[j].length: " + imageArrayForClips[j].length );
 					}
