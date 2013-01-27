@@ -49,6 +49,8 @@ class SceneRoom extends Scene
 	var bgChannel_ : nme.media.SoundChannel = null;
 	var exit_ : Bool = false;
 	var player_ : Player = null;
+	var currentEndFrame_ : Int = 1;
+	var endingBitmap_ : Bitmap = null;
 
 	public function new( p_parentContext : Sprite ) {
 		super( SceneRoom.ID, p_parentContext );
@@ -159,6 +161,46 @@ class SceneRoom extends Scene
 				// 	corpse.y = 120;
 				// 	corpseLayer.addChild( corpse );
 				// }
+			}
+			case 5: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_01.png" ) );
+					corpse.x = 430;
+					corpse.y = 370;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_02.png" ) );
+					corpse.x = 170;
+					corpse.y = 470;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_03.png" ) );
+					corpse.x = 500;
+					corpse.y = 540;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_04.png" ) );
+					corpse.x = 136;
+					corpse.y = 204;
+					corpseLayer.addChild( corpse );
+				}
+
+
+				player_.context.visible = false;
+				Actuate.tween( player_.context, 1, {} ).onComplete( playEndAnimation );
+
+				if( endingBitmap_== null ) {
+					endingBitmap_ = new Bitmap(); // Assets.getBitmapData( "assets/game/"
+					endingBitmap_.x = 400;
+					endingBitmap_.y = 240;
+					this.context.addChild( endingBitmap_ );endingBitmap_.bitmapData = Assets.getBitmapData( "assets/game/CHAR_GIRL_END_0" + currentEndFrame_ + ".png" );
+				}
 			}
 			default: {
 				{
@@ -289,6 +331,22 @@ class SceneRoom extends Scene
 		corpseLayer.x = corpseLayer.x - modX;
 		corpseLayer.y = corpseLayer.y - modY;
 		
+	}
+
+	function playEndAnimation() : Void {
+
+		if( currentEndFrame_ > 20 ) {
+
+		} else {
+			if( currentEndFrame_ < 10 ) {
+				endingBitmap_.bitmapData = Assets.getBitmapData( "assets/game/CHAR_GIRL_END_0" + currentEndFrame_ + ".png" );
+				} else {
+					endingBitmap_.bitmapData = Assets.getBitmapData( "assets/game/CHAR_GIRL_END_" + currentEndFrame_ + ".png" );
+
+				}
+			++currentEndFrame_;
+			Actuate.tween( player_.context, 0.2, {} ).onComplete( playEndAnimation );
+		}
 	}
 
 	function onGameOver() : Void {
