@@ -10,8 +10,9 @@ import firerice.core.motionwelder.MReader;
 class Monster extends Actor {
 
 	var initial_speed : Float = 50;
-	var trace_speed : Float = 130;
-	var trace_range : Float = 250;
+	var trace_speed : Float = 140;
+	var detection_range : Float = 160;
+	var trace_range : Float = 320;
 
 	var target_x : Int;
 	var target_y : Int;
@@ -58,6 +59,11 @@ class Monster extends Actor {
 
 			target_x = Std.int(wayPointList[0].x);
 			target_y = Std.int(wayPointList[0].y);
+
+			if (isTransfored)
+			{
+				isTransfored = false;
+			}
 		}
 	}
 
@@ -70,15 +76,22 @@ class Monster extends Actor {
 
 	public function setWayPoint( p_pointAry : Array<Point> )
 	{
-		wayPointList = p_pointAry;
-		target_x = Std.int(wayPointList[0].x);
-		target_y = Std.int(wayPointList[0].y);
+		if (p_pointAry != null)
+		{
+			wayPointList = p_pointAry;
+			target_x = Std.int(wayPointList[0].x);
+			target_y = Std.int(wayPointList[0].y);
+		}
 	}
 
 	private function completeHandler()
 	{
 		isTransforming = false;
-		isTransfored = true;
+
+		if (isTracePlayer = true)
+		{
+			isTransfored = true;
+		}
 	}
 
 	override function update_( dt : Float ) : Void 
@@ -108,13 +121,16 @@ class Monster extends Actor {
 			}
 		}
 		
-		if (Point.distance(new Point(Global.getInstance().GameCharacter.x, Global.getInstance().GameCharacter.y), new Point(this.x, this.y)) < trace_range)
+		if (Point.distance(new Point(Global.getInstance().GameCharacter.x, Global.getInstance().GameCharacter.y), new Point(this.x, this.y)) < detection_range)
 		{
 			this.tracePlayer();
 		}
 		else
 		{
-			this.unTracePlayer();
+			if (Point.distance(new Point(Global.getInstance().GameCharacter.x, Global.getInstance().GameCharacter.y), new Point(this.x, this.y)) > trace_range)
+			{
+				this.unTracePlayer();
+			}
 		}
 		
 		if (isTracePlayer == true)
@@ -126,7 +142,7 @@ class Monster extends Actor {
 		if (target_x != 0 && !isTransforming)
 		{
 			if (this.x < target_x)
-			{
+			{	
 				if (this.currAnimType != ActorAnimType.walkRight && !isTransfored)
 				{
 					this.playAnim( ActorAnimType.walkRight );

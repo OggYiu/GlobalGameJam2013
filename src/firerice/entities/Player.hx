@@ -26,7 +26,7 @@ import nme.events.KeyboardEvent;
  */
 
 class Player extends Actor {
-	public static var PLAYER_VELOCITY : Float = 300;
+	public static var PLAYER_VELOCITY : Float = 180;
 	
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );

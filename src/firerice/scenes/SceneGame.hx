@@ -10,6 +10,7 @@ import firerice.core.InputManager;
 import firerice.entities.Actor;
 import firerice.entities.Player;
 import firerice.entities.Monster;
+import firerice.entities.Victim;
 import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
 import firerice.core.motionwelder.MReader;
@@ -120,6 +121,11 @@ class SceneGame extends Scene
 		points3[2] = new Point(900, 700);
 		this.createMonster(900, 600, points3);
 
+		var points4:Array<Point> = new Array<Point>();
+		points4[0] = new Point(900, 350);
+		points4[1] = new Point(700, 350);
+		this.createVictim(850, 350, points4);
+
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
 		// bgChannel.soundTransform.volume = 0.0;
@@ -147,6 +153,18 @@ class SceneGame extends Scene
 		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
 		monster_.setWayPoint(p_wayPoints);
 		monsterList.push(monster_);
+	}
+
+	private function createVictim(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	{
+		var victim_ = new Victim("victim" + monsterList.length + 1);
+		this.addChild( victim_ );
+		enemyCharacterLayer.addChild( victim_.context );
+		victim_.context.x = victim_.x = p_x;
+		victim_.context.y = victim_.y = p_y;
+		victim_.addComponent( new AnimationComponent( victim_, "assets/motionwelder/npc_boy" ) );
+		victim_.setWayPoint(p_wayPoints);
+		monsterList.push(victim_);
 	}
 
 	override function update_( dt : Float ) : Void {
