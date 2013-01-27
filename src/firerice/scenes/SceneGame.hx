@@ -111,34 +111,164 @@ class SceneGame extends Scene
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 		Global.getInstance().GameCharacter = player_;
 
-		var points:Array<Point> = new Array<Point>();
-		points[0] = new Point(280, 280);
-		points[1] = new Point(200, 400);
-		points[2] = new Point(150, 250);
-		this.createMonster2(250, 250, points, "assets/motionwelder/npc_boy");
+		if (Global.getInstance().currentLevel == 1)
+		{
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1700, 1200);
+			points[1] = new Point(1700, 1400);
+			points[2] = new Point(1600, 1400);
+			this.createMonster(1600, 1200, points, "assets/motionwelder/npc_boy2");
 
-		var points2:Array<Point> = new Array<Point>();
-		points2[0] = new Point(620, 700);
-		points2[1] = new Point(530, 710);
-		points2[2] = new Point(650, 650);
-		this.createMonster(700, 700, points2, "assets/motionwelder/npc_boy2");
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(100, 350);
+			points[1] = new Point(200, 450);
+			points[2] = new Point(200, 550);
+			this.createMonster(150, 350, points, "assets/motionwelder/npc_boy3");
 
-		var points3:Array<Point> = new Array<Point>();
-		points3[0] = new Point(950, 750);
-		points3[1] = new Point(850, 800);
-		points3[2] = new Point(900, 700);
-		this.createMonster(900, 600, points3, "assets/motionwelder/npc_boy3");
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(300, 1350);
+			points[1] = new Point(400, 1250);
+			points[2] = new Point(450, 1150);
+			this.createVictim(350, 1200, points, "assets/motionwelder/npc_boy");
+		}
+		else if (Global.getInstance().currentLevel == 2)
+		{
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(100, 400);
+			points[1] = new Point(200, 300);
+			points[2] = new Point(100, 500);
+			this.createMonster(200, 250, points, "assets/motionwelder/npc_boy");
 
-		var points3:Array<Point> = new Array<Point>();
-		points3[0] = new Point(950, 1550);
-		points3[1] = new Point(850, 1800);
-		points3[2] = new Point(900, 1700);
-		this.createMonster(900, 1600, points3, "assets/motionwelder/npc_boy4");
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1000, 1350);
+			points[1] = new Point(1200, 1450);
+			points[2] = new Point(1200, 1550);
+			this.createMonster(1150, 1350, points, "assets/motionwelder/npc_boy3");
 
-		var points4:Array<Point> = new Array<Point>();
-		points4[0] = new Point(900, 350);
-		points4[1] = new Point(700, 350);
-		this.createVictim(850, 350, points4, "assets/motionwelder/npc_boy5");
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(500, 1350);
+			points[1] = new Point(600, 1450);
+			points[2] = new Point(400, 1550);
+			this.createMonster(550, 1350, points, "assets/motionwelder/npc_boy3");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1000, 350);
+			points[1] = new Point(1200, 450);
+			points[2] = new Point(1200, 550);
+			this.createMonster(1150, 350, points, "assets/motionwelder/npc_boy4");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(100, 1350);
+			points[1] = new Point(200, 1450);
+			points[2] = new Point(200, 1550);
+			this.createMonster(150, 1350, points, "assets/motionwelder/npc_boy5");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1200, 1250);
+			points[1] = new Point(1220, 1300);
+			points[2] = new Point(1250, 1250);
+			this.createMonster(1100, 1150, points, "assets/motionwelder/npc_boy");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1300, 1350);
+			points[1] = new Point(1400, 1250);
+			points[2] = new Point(1450, 1150);
+			this.createVictim(1350, 1200, points, "assets/motionwelder/npc_boy2");
+		}
+		else if (Global.getInstance().currentLevel == 3)
+		{
+			/*
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(280, 280);
+			points[1] = new Point(200, 400);
+			points[2] = new Point(150, 250);
+			this.createMonster2(250, 250, points, "assets/motionwelder/npc_boy");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(620, 700);
+			points[1] = new Point(530, 710);
+			points[2] = new Point(650, 650);
+			this.createMonster(700, 700, points, "assets/motionwelder/npc_boy2");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(950, 750);
+			points[1] = new Point(850, 800);
+			points[2] = new Point(900, 700);
+			this.createMonster(900, 600, points, "assets/motionwelder/npc_boy3");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(950, 1550);
+			points[1] = new Point(850, 1800);
+			points[2] = new Point(900, 1700);
+			this.createMonster(900, 1600, points, "assets/motionwelder/npc_boy4");
+			*/
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(880, 380);
+			points[1] = new Point(700, 400);
+			points[2] = new Point(850, 350);
+			this.createMonster(820, 450, points, "assets/motionwelder/npc_boy");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1180, 1480);
+			points[1] = new Point(1100, 1300);
+			points[2] = new Point(1050, 1450);
+			this.createMonster(1120, 1350, points, "assets/motionwelder/npc_boy");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(700, 750);
+			points[1] = new Point(850, 800);
+			points[2] = new Point(750, 850);
+			this.createMonster(750, 850, points, "assets/motionwelder/npc_boy2");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1700, 250);
+			points[1] = new Point(1850, 300);
+			points[2] = new Point(1750, 250);
+			this.createMonster2(1750, 280, points, "assets/motionwelder/npc_boy2");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(200, 650);
+			points[1] = new Point(250, 700);
+			points[2] = new Point(250, 750);
+			this.createMonster2(250, 650, points, "assets/motionwelder/npc_boy3");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1800, 650);
+			points[1] = new Point(1750, 700);
+			points[2] = new Point(1850, 750);
+			this.createMonster2(1750, 650, points, "assets/motionwelder/npc_boy3");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1880, 880);
+			points[1] = new Point(1700, 900);
+			points[2] = new Point(1850, 850);
+			this.createMonster(1820, 950, points, "assets/motionwelder/npc_boy4");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1280, 1280);
+			points[1] = new Point(1300, 1300);
+			points[2] = new Point(1450, 1450);
+			this.createMonster(1220, 1250, points, "assets/motionwelder/npc_boy4");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(280, 1880);
+			points[1] = new Point(370, 1900);
+			points[2] = new Point(250, 1850);
+			this.createMonster(220, 1950, points, "assets/motionwelder/npc_boy5");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1280, 1880);
+			points[1] = new Point(1370, 1900);
+			points[2] = new Point(1250, 1850);
+			this.createMonster(1220, 1950, points, "assets/motionwelder/npc_boy5");
+
+			var points:Array<Point> = new Array<Point>();
+			points[0] = new Point(1700, 780);
+			points[1] = new Point(1600, 720);
+			points[1] = new Point(1500, 800);
+			this.createVictim(1550, 850, points, "assets/motionwelder/npc_boy3");
+		}
 
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
@@ -148,13 +278,11 @@ class SceneGame extends Scene
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
-		/*
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
-		*/
 
 		// interface
 		// var heartBar : ProgressBar = new ProgressBar( this.interfaceLayer, 80, 40 );
