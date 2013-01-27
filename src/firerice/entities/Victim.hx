@@ -1,9 +1,7 @@
 package firerice.entities;
 
-class Victim extends Monster {
-
-
-
+class Victim extends Monster 
+{
 	override function tracePlayer()
 	{
 		if (isTracePlayer == false)
@@ -24,5 +22,4 @@ class Victim extends Monster {
 			target_y = Std.int(wayPointList[0].y);
 		}
 	}
-
 }

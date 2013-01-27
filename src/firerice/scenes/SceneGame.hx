@@ -10,6 +10,7 @@ import firerice.core.InputManager;
 import firerice.entities.Actor;
 import firerice.entities.Player;
 import firerice.entities.Monster;
+import firerice.entities.Monster2;
 import firerice.entities.Victim;
 import firerice.types.EUserInterface;
 import firerice.core.motionwelder.MAnimationSet;
@@ -107,7 +108,7 @@ class SceneGame extends Scene
 		points[0] = new Point(280, 280);
 		points[1] = new Point(200, 400);
 		points[2] = new Point(150, 250);
-		this.createMonster(250, 250, points);
+		this.createMonster2(250, 250, points);
 
 		var points2:Array<Point> = new Array<Point>();
 		points2[0] = new Point(620, 700);
@@ -141,6 +142,18 @@ class SceneGame extends Scene
 		maskLayer.y = -150;
 		this.context.addChild(maskLayer);
 		*/
+	}
+
+	private function createMonster2(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	{
+		var monster_ = new Monster2("monster" + monsterList.length + 1);
+		this.addChild( monster_ );
+		enemyCharacterLayer.addChild( monster_.context );
+		monster_.context.x = monster_.x = p_x;
+		monster_.context.y = monster_.y = p_y;
+		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
+		monster_.setWayPoint(p_wayPoints);
+		monsterList.push(monster_);
 	}
 
 	private function createMonster(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
