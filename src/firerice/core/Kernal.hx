@@ -47,8 +47,8 @@ class Kernal extends Process {
 		
 		// var startSceneId : String = SceneTest.ID;
 		// var startSceneId : String = SceneYiuTest.ID;
-		// var startSceneId : String = SceneRoom.ID;
-		var startSceneId : String = SceneGame.ID;
+		var startSceneId : String = SceneRoom.ID;
+		// var startSceneId : String = SceneGame.ID;
 		changeScene( startSceneId );
 	}
 
@@ -63,7 +63,7 @@ class Kernal extends Process {
 
 		//trace( "creating scene: " + sceneId );
 		var scene : Scene = Type.createInstance( targetClassType, [ canvas_ ] );
-		trace( "scene created: " + scene );
+		// trace( "scene created: " + scene );
 		currentScene = scene;
 	}
 	

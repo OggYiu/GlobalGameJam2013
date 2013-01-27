@@ -42,28 +42,33 @@ class SceneRoom extends Scene
 
 	public var blackWhiteMap( default, null ) : BitmapData = null;
 	public var floorLayer( default, null ) : Sprite = null;
+	public var characterLayer( default, null ) : Sprite = null;
+	public var corpseLayer( default, null ) : Sprite = null;
 
 	var bgMusic_ : Sound = null;
 	var bgChannel_ : nme.media.SoundChannel = null;
 	var exit_ : Bool = false;
 	var player_ : Player = null;
+
 	public function new( p_parentContext : Sprite ) {
 		super( SceneRoom.ID, p_parentContext );
 
 		floorLayer = new Sprite();
 		this.context.addChild( floorLayer );
+		corpseLayer = new Sprite();
+		this.context.addChild( corpseLayer );
+		characterLayer = new Sprite();
+		this.context.addChild( characterLayer );
+
 
 		blackWhiteMap = Assets.getBitmapData( "assets/img/ROOM_BW.png" );
 
 		var bitmap : Bitmap = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_01.png" ) );
 		floorLayer.addChild( bitmap );
-		this.context.addChild( floorLayer );
-		// bitmap.x = ( 1024 - bitmap.width ) / 2;
-		// bitmap.y = ( 768 - bitmap.height ) / 2;
 
 		player_ = new Player( "player");
 		this.addChild( player_ );
-		this.context.addChild( player_.context );
+		characterLayer.addChild( player_.context );
 		player_.context.x = player_.x = 512;
 		player_.context.y = player_.y = 389;
 		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
@@ -78,6 +83,92 @@ class SceneRoom extends Scene
 		bgMusic_ = Assets.getSound ("assets/audio/clockticking.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
 
+		var currentLevel : Int = Global.getInstance().currentLevel;
+		var corpse : Bitmap = null;
+		switch( currentLevel ) {
+			case 1: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_A.png" ) );
+					corpse.x = 660;
+					corpse.y = 120;
+					corpseLayer.addChild( corpse );
+				}
+			}
+			case 2: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_01.png" ) );
+					corpse.x = 430;
+					corpse.y = 370;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_B.png" ) );
+					corpse.x = 660;
+					corpse.y = 120;
+					corpseLayer.addChild( corpse );
+				}
+			}
+			case 3: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_01.png" ) );
+					corpse.x = 430;
+					corpse.y = 370;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_02.png" ) );
+					corpse.x = 170;
+					corpse.y = 470;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_C.png" ) );
+					corpse.x = 660;
+					corpse.y = 120;
+					corpseLayer.addChild( corpse );
+				}
+			}
+			case 4: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_01.png" ) );
+					corpse.x = 430;
+					corpse.y = 370;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_02.png" ) );
+					corpse.x = 170;
+					corpse.y = 470;
+					corpseLayer.addChild( corpse );
+				}
+
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_03.png" ) );
+					corpse.x = 500;
+					corpse.y = 540;
+					corpseLayer.addChild( corpse );
+				}
+
+				// {
+				// 	corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_D.png" ) );
+				// 	corpse.x = 660;
+				// 	corpse.y = 120;
+				// 	corpseLayer.addChild( corpse );
+				// }
+			}
+			default: {
+				{
+					corpse = new Bitmap( Assets.getBitmapData( "assets/img/ROOM_ITEM_E.png" ) );
+					corpse.x = 660;
+					corpse.y = 120;
+					corpseLayer.addChild( corpse );
+				}
+			}
+		}
 		// test
 		// var bitmap : Bitmap = new Bitmap( blackWhiteMap );
 		// bitmap.alpha = 0.5;
@@ -194,6 +285,10 @@ class SceneRoom extends Scene
 
 		floorLayer.x = floorLayer.x - modX;
 		floorLayer.y = floorLayer.y - modY;
+
+		corpseLayer.x = corpseLayer.x - modX;
+		corpseLayer.y = corpseLayer.y - modY;
+		
 	}
 
 	function onGameOver() : Void {

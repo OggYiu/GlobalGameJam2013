@@ -100,13 +100,16 @@ class SceneGame extends Scene
 
 
 		floorLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_001.png" ) ) );
-		obstaclesLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
+		// obstaclesLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/MAP_002.png" ) ) );
 
 		player_ = new Player( "player");
 		this.addChild( player_ );
 		playerCharacterLayer.addChild( player_.context );
-		player_.context.x = player_.x = 512;
-		player_.context.y = player_.y = 389;
+		player_.context.x = player_.x = 1002;
+		player_.context.y = player_.y = 1948;
+		// player_.context.x = player_.x = 1214;
+		// player_.context.y = player_.y = 0;
+		moveCamera( player_.x - 512, player_.y - 389 );
 		// player_.addComponent( new TransformComponent( player_, 512, 389, 0 ) );
 		player_.addComponent( new AnimationComponent( player_, "assets/motionwelder/girl" ) );
 		Global.getInstance().GameCharacter = player_;
@@ -278,6 +281,16 @@ class SceneGame extends Scene
 		CollisionManager.getInstance().target = this;
 		CollisionManager.getInstance().handler = onCollide;
 
+		if( Global.getInstance().currentLevel >= 4 ) {
+		// if( true ) {
+			var bitmap : Bitmap = new Bitmap( Assets.getBitmapData( "assets/img/map_door.png") );
+			bitmap.x = 1214;
+			bitmap.y = 0;
+			obstaclesLayer.addChild( bitmap );
+
+			// CollisionManager.getInstance().addCollisionBox();
+		}
+		
 		var maskLayer = new Sprite();
 		maskLayer.addChild( new Bitmap( Assets.getBitmapData( "assets/img/LIGHT.png" ) ) );
 		maskLayer.x = 0;
@@ -401,13 +414,14 @@ class SceneGame extends Scene
 			}
 		}
 
+		// trace( "player_.x: " + player_.x + ", " + player_.y );
 		moveCamera( modX, modY );
 
 		CollisionManager.getInstance().update( dt );
 		HeartBeat.getInstance().update( dt );
 	}
 
-	function blackWhiteMapHitTest( p_x : Float, p_y : Float, p_width : Float, p_height : Float ) : Bool {
+	public function blackWhiteMapHitTest( p_x : Float, p_y : Float, p_width : Float, p_height : Float ) : Bool {
 		for( x in Std.int(p_x) ... Std.int( p_width + p_x ) ) {
 			for( y in Std.int(p_y) ... Std.int( p_height + p_y ) ) {
 
