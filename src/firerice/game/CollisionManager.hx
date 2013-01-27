@@ -110,9 +110,28 @@ class CollisionManager extends Process, implements IDisplayable {
 					continue;
 				}
 
+				if( boxA.owner != null &&
+					boxB.owner != null ) {
+					if(	boxA.owner.isEnemy &&
+						boxB.owner.isEnemy ) {
+						continue;
+					}
+				}
+
 				if( hitTest(	boxA.rect.x, boxA.rect.y, boxA.rect.width, boxA.rect.height,
 								boxB.rect.x, boxB.rect.y, boxB.rect.width, boxB.rect.height ) ) {
 					if( target != null && handler != null ) {
+						if( boxA.owner != null &&
+						boxB.owner != null ) {
+							if(	boxA.owner.playerType == ActorEntityType.victim ||
+								boxB.owner.playerType == ActorEntityType.victim ) {
+								if( Global.getInstance().sceneGame != null ) {
+									// trace( "gameWon" );
+									Global.getInstance().sceneGame.gameWon = true;
+								}
+							}
+						}
+
 						Reflect.callMethod( target, handler, [ boxA, boxB ] );
 					}
 				}

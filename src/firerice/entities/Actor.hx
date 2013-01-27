@@ -36,14 +36,21 @@ enum ActorAnimType {
 	runLeft;
 }
 
+enum ActorEntityType {
+	player;
+	monster;
+	victim;
+}
+
 class Actor extends Entity {
 	public var animComponent( default, null ) : AnimationComponent = null;
 	public var currAnimType( default, null ) : ActorAnimType;
 	public var currentFrame( default, null ) : MFrame = null;
-
+	public var playerType( default, null ) : ActorEntityType;
+	public var isEnemy( default, null ) : Bool = false;
 
 	var firstUpdate_ : Bool = true;
-
+	
 	public function new( p_id : String, ?p_parent : Dynamic ) {
 		super( p_id, p_parent );
 	}

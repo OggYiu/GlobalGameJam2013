@@ -35,10 +35,11 @@ typedef Int = Int;
 
 class Style {
 	public inline static var BACKGROUND:Int = 0xCCCCCC;
+	// public inline static var BACKGROUND:Int = 0xCCCCCC;
 	public inline static var BUTTON_FACE:Int = 0xFFFFFF;
 	public inline static var INPUT_TEXT:Int = 0x333333;
 	public inline static var LABEL_TEXT:Int = 0x666666;
 	public inline static var DROPSHADOW:Int = 0x000000;
 	public inline static var PANEL:Int = 0xF3F3F3;
-	public inline static var PROGRESS_BAR:Int = 0xFFFFFF;
+	public inline static var PROGRESS_BAR:Int = 0xFF3333;
 }
