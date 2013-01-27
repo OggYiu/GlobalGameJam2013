@@ -28,7 +28,7 @@ import com.eclecticdesignstudio.motion.Actuate;
 class HeartBeat {
 	public var DEFAULT_FEQUENCE : Float = 1;
 	public var MAX_FEQUENCE : Float = 100;
-	public var VICTIM_MIN_DISTANCE : Float = 400;
+	public var VICTIM_MIN_DISTANCE : Float = 300;
 
 	public var frequence( default, default ) : Float;
 	public var playing( default, null ) : Bool = false;
@@ -131,7 +131,7 @@ class HeartBeat {
 		}
 
 		var factor : Float = ( ( VICTIM_MIN_DISTANCE - ( distance - VICTIM_MIN_DISTANCE ) ) / 250 );
-		factor = Math.pow( factor, 2 );
+		// factor = Math.pow( factor, 2 );
 		this.frequence = DEFAULT_FEQUENCE + factor;
 		// trace( "VICTIM_MIN_DISTANCE: " + VICTIM_MIN_DISTANCE );
 		// trace( "distanc3: " + distance );
