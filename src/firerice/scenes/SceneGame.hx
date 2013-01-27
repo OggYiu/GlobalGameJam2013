@@ -113,24 +113,30 @@ class SceneGame extends Scene
 		points[0] = new Point(280, 280);
 		points[1] = new Point(200, 400);
 		points[2] = new Point(150, 250);
-		this.createMonster2(250, 250, points);
+		this.createMonster2(250, 250, points, "assets/motionwelder/npc_boy");
 
 		var points2:Array<Point> = new Array<Point>();
 		points2[0] = new Point(620, 700);
 		points2[1] = new Point(530, 710);
 		points2[2] = new Point(650, 650);
-		this.createMonster(700, 700, points2);
+		this.createMonster(700, 700, points2, "assets/motionwelder/npc_boy2");
 
 		var points3:Array<Point> = new Array<Point>();
 		points3[0] = new Point(950, 750);
 		points3[1] = new Point(850, 800);
 		points3[2] = new Point(900, 700);
-		this.createMonster(900, 600, points3);
+		this.createMonster(900, 600, points3, "assets/motionwelder/npc_boy3");
+
+		var points3:Array<Point> = new Array<Point>();
+		points3[0] = new Point(950, 1550);
+		points3[1] = new Point(850, 1800);
+		points3[2] = new Point(900, 1700);
+		this.createMonster(900, 1600, points3, "assets/motionwelder/npc_boy4");
 
 		var points4:Array<Point> = new Array<Point>();
 		points4[0] = new Point(900, 350);
 		points4[1] = new Point(700, 350);
-		this.createVictim(850, 350, points4);
+		this.createVictim(850, 350, points4, "assets/motionwelder/npc_boy5");
 
 		bgMusic_ = Assets.getSound ("assets/audio/ambient.mp3");
 		bgChannel_ = bgMusic_.play( 0, 10000 );
@@ -156,38 +162,38 @@ class SceneGame extends Scene
 		// slider.value = ;
 	}
 
-	private function createMonster2(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	private function createMonster2(p_x : Int, p_y : Int, p_wayPoints : Array<Point>, animationFilePath)
 	{
 		var monster_ = new Monster2("monster" + monsterList.length + 1);
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
 		monster_.context.x = monster_.x = p_x;
 		monster_.context.y = monster_.y = p_y;
-		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
+		monster_.addComponent( new AnimationComponent( monster_, animationFilePath,  "assets/motionwelder/npc_boy") );
 		monster_.setWayPoint(p_wayPoints);
 		monsterList.push(monster_);
 	}
 
-	private function createMonster(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	private function createMonster(p_x : Int, p_y : Int, p_wayPoints : Array<Point>, animationFilePath)
 	{
 		var monster_ = new Monster("monster" + monsterList.length + 1);
 		this.addChild( monster_ );
 		enemyCharacterLayer.addChild( monster_.context );
 		monster_.context.x = monster_.x = p_x;
 		monster_.context.y = monster_.y = p_y;
-		monster_.addComponent( new AnimationComponent( monster_, "assets/motionwelder/npc_boy" ) );
+		monster_.addComponent( new AnimationComponent( monster_, animationFilePath, "assets/motionwelder/npc_boy") );
 		monster_.setWayPoint(p_wayPoints);
 		monsterList.push(monster_);
 	}
 
-	private function createVictim(p_x : Int, p_y : Int, p_wayPoints : Array<Point>)
+	private function createVictim(p_x : Int, p_y : Int, p_wayPoints : Array<Point>, animationFilePath)
 	{
 		var victim_ = new Victim("victim" + monsterList.length + 1);
 		this.addChild( victim_ );
 		enemyCharacterLayer.addChild( victim_.context );
 		victim_.context.x = victim_.x = p_x;
 		victim_.context.y = victim_.y = p_y;
-		victim_.addComponent( new AnimationComponent( victim_, "assets/motionwelder/npc_boy" ) );
+		victim_.addComponent( new AnimationComponent( victim_, animationFilePath, "assets/motionwelder/npc_boy" ) );
 		victim_.setWayPoint(p_wayPoints);
 		monsterList.push(victim_);
 	}
