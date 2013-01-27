@@ -295,6 +295,7 @@ class SceneGame extends Scene
 			bitmap.y = 0;
 			obstaclesLayer.addChild( bitmap );
 
+			CollisionManager.getInstance().addCollisionBox( new CollisionBox( null, new Rectangle( bitmap.x, bitmap.y, bitmap.width, bitmap.height ) ) );
 			// CollisionManager.getInstance().addCollisionBox();
 		}
 		
@@ -474,6 +475,12 @@ class SceneGame extends Scene
 			sound = Assets.getSound( "assets/audio/girlLaugh.mp3" );
 			++Global.getInstance().currentLevel;
 		}
+
+		if( boxA.owner == null || boxB.owner == null ) {
+			sound = Assets.getSound( "assets/audio/dead" + value + ".mp3" );
+			++Global.getInstance().currentLevel;
+		}
+
 		sound.play();
 	}
 

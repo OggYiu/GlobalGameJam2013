@@ -13,7 +13,7 @@ class Global {
 	public var sceneGame( default, default ) : SceneGame;
 	public var victim( default, default ) : Victim;
 	public var currentLevel( default, default ) : Int = 1;
-	// public var currentLevel( default, default ) : Int = 5;
+	// public var currentLevel( default, default ) : Int = 4;
 
 	public function new() {
 		cameraPos = new Point( 0, 0 );

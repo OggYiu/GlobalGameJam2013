@@ -191,7 +191,7 @@ class SceneRoom extends Scene
 					corpseLayer.addChild( corpse );
 				}
 
-
+				exit_ = true;
 				player_.context.visible = false;
 				Actuate.tween( player_.context, 1, {} ).onComplete( playEndAnimation );
 
